@@ -1,12 +1,10 @@
 package appointment.system;
 
-import JPAEntities.AppointmentEntity;
-import JPAEntities.DoctorEntity;
-import JPAEntities.PatientEntity;
 import java.util.Calendar;
 import java.util.List;
 
 public interface IAppointmentManager {
+    /*
 
     public void createAppointment(NewAppointmentDTO newAppointmentDTO);
 
@@ -26,5 +24,7 @@ public interface IAppointmentManager {
     public boolean cancelAppointment(Long appointmentId);
 
     public ExistentAppointmentDTO findAppointmentById(Long appointmentId);
+
+     */
 
 }

@@ -1,32 +1,10 @@
 package appointment.system;
 
-import JPAEntities.AppointmentEntity;
-import JPAEntities.AppointmentStateEntity;
-import JPAEntities.DoctorEntity;
-import JPAEntities.PatientEntity;
-import connection.ConnectionDB;
-import connection.IConnectionDB;
-import doctor.system.ExistentDoctorDTO;
-import doctor.system.IDoctorDAO;
-import factory.Factory;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import javax.swing.JOptionPane;
-import patient.system.ExistentPatientDTO;
-import patient.system.IPatientDAO;
+
 
 public abstract class AppointmentManager implements IAppointmentManager {
 
+    /*
     private EntityManagerFactory emf;
     private EntityManager em;
 
@@ -216,4 +194,5 @@ public abstract class AppointmentManager implements IAppointmentManager {
         };
     }
 
+     */
 }

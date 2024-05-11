@@ -1,18 +1,11 @@
 package administrator.system;
 
-import JPAEntities.AdministratorEntity;
-import JPAEntities.UserAdministrator;
-import connection.ConnectionDB;
-import connection.IConnectionDB;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
-import patient.system.PatientDAO;
+
+
 
 public class AdministratorDAO implements IAdministratorDAO {
+
+    /*
 
     private static final Logger LOGGER = Logger.getLogger(PatientDAO.class.getName());
     private EntityManagerFactory emf;
@@ -78,5 +71,5 @@ public class AdministratorDAO implements IAdministratorDAO {
         return new AdministratorDAO() {
         };
     }
-
+     */
 }

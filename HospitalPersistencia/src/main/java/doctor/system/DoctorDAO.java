@@ -1,26 +1,8 @@
 package doctor.system;
 
-import JPAEntities.DoctorEntity;
-import JPAEntities.Specialization;
-import connection.ConnectionDB;
-import connection.IConnectionDB;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
-import javax.swing.JOptionPane;
-import patient.system.PatientDAO;
-
 public class DoctorDAO implements IDoctorDAO {
 
-    private static final Logger LOGGER = Logger.getLogger(PatientDAO.class.getName());
-    private EntityManagerFactory emf;
-    private EntityManager em;
-
+    /*
     public DoctorDAO() {
 
         IConnectionDB connection = new ConnectionDB();
@@ -68,7 +50,7 @@ public class DoctorDAO implements IDoctorDAO {
         doctor.setFirstLastName(doctorDTO.getFirstName());
         doctor.setSecondLastName(doctorDTO.getSecondName());
         doctor.setMedicalCart(doctorDTO.getMedicalCart());
-        doctor.setSpecialization(JPAEntities.Specialization.FAMILY);
+        doctor.setSpecialization(pojo.Specialization.FAMILY);
 
         return doctor;
     }
@@ -85,7 +67,7 @@ public class DoctorDAO implements IDoctorDAO {
 
         try {
             return em.find(DoctorEntity.class, idDoctor);
-        } catch (NoResultException e) {
+        } catch (Exception e) {
             LOGGER.log(Level.INFO, "No se encontró ningún doctor con el ID especificado.");
             return null;
         } finally {
@@ -99,29 +81,29 @@ public class DoctorDAO implements IDoctorDAO {
         try {
             TypedQuery<DoctorEntity> query = em.createQuery("SELECT d FROM DoctorEntity d WHERE d.medicalCart = :medicalCart", DoctorEntity.class);
             query.setParameter("medicalCart", medicart);
-            if(query.getSingleResult() == null){
-                
+            if (query.getSingleResult() == null) {
+
                 JOptionPane.showMessageDialog(null, "The medicalCart has no owner");
                 return null;
-            }else{
-                
+            } else {
+
                 List<DoctorEntity> resultList = query.getResultList();
                 int numResults = resultList.size();
                 if (numResults != 0 && query.getSingleResult() != null && 1 == 0) {
 
                     JOptionPane.showMessageDialog(null, "The meidcalCart issss already in use");
                     return null;
-                }else if(numResults == 1){
+                } else if (numResults == 1) {
 
                     return query.getSingleResult();
 
                 }
-                
+
             }
             JOptionPane.showMessageDialog(null, "No solution");
             return null;
-            
-        } catch (NoResultException e) {
+
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "The meidcalCart has been validated");
             return null;
         } finally {
@@ -166,5 +148,5 @@ public class DoctorDAO implements IDoctorDAO {
         doctorDTO.setMedicalCart(doctorEntity.getMedicalCart());
         return doctorDTO;
     }
-
+*/
 }

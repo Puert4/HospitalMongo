@@ -2,39 +2,53 @@ package user.system;
 
 import administrator.system.newAdministratorDTO;
 import doctor.system.NewDoctorDTO;
+import org.bson.types.ObjectId;
 import patient.system.NewPatientDTO;
 
-public class NewUserDTO {
+/**
+ *
+ * @author TeLesheo
+ */
+public class ExistentUserDTO {
 
+    private ObjectId id;
     private String user;
     private String password;
+    private String userType;
     private NewPatientDTO patientDTO;
     private NewDoctorDTO doctorDTO;
     private newAdministratorDTO administratorDTO;
-    private String userType;
 
-    public NewUserDTO() {
-    }
-
-    public NewUserDTO(String user, String password, NewPatientDTO patientDTO) {
+    public ExistentUserDTO(ObjectId id, String user, String password, String userType, NewPatientDTO patientDTO) {
+        this.id = id;
         this.user = user;
         this.password = password;
+        this.userType = userType;
         this.patientDTO = patientDTO;
-        this.userType = "PATIENT";
     }
 
-    public NewUserDTO(String user, String password, NewDoctorDTO doctorDTO) {
+    public ExistentUserDTO(ObjectId id, String user, String password, String userType, NewDoctorDTO doctorDTO) {
+        this.id = id;
         this.user = user;
         this.password = password;
+        this.userType = userType;
         this.doctorDTO = doctorDTO;
-        this.userType = "DOCTOR";
     }
 
-    public NewUserDTO(String user, String password, newAdministratorDTO administratorDTO) {
+    public ExistentUserDTO(ObjectId id, String user, String password, String userType, newAdministratorDTO administratorDTO) {
+        this.id = id;
         this.user = user;
         this.password = password;
+        this.userType = userType;
         this.administratorDTO = administratorDTO;
-        this.userType = "ADMIN";
+    }
+
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 
     public String getUser() {
@@ -51,6 +65,14 @@ public class NewUserDTO {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getUserType() {
+        return userType;
+    }
+
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     public NewPatientDTO getPatientDTO() {
@@ -75,14 +97,6 @@ public class NewUserDTO {
 
     public void setAdministratorDTO(newAdministratorDTO administratorDTO) {
         this.administratorDTO = administratorDTO;
-    }
-
-    public String getUserType() {
-        return userType;
-    }
-
-    public void setUserType(String userType) {
-        this.userType = userType;
     }
 
 }

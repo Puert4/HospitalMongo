@@ -1,7 +1,6 @@
 package patient.system;
 
-import JPAEntities.PatientEntity;
-import java.util.List;
+
 
 /**
  *
@@ -10,6 +9,8 @@ import java.util.List;
 public interface IPatientDAO {
 
     public void registerPatient(NewPatientDTO newPatient);
+    
+    /*
 
     public PatientEntity serachPatientById(Long idPatient);
 
@@ -24,5 +25,7 @@ public interface IPatientDAO {
     public List<ExistentPatientDTO> findAllPatient();
     
     public PatientEntity findPatient(Long id);
+
+*/
     
 }

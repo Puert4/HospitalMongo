@@ -1,34 +1,18 @@
 package patient.system;
 
-import JPAEntities.PatientEntity;
-import connection.ConnectionDB;
-import connection.IConnectionDB;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 public class PatientDAO implements IPatientDAO {
 
     private static final Logger LOGGER = Logger.getLogger(PatientDAO.class.getName());
-    private EntityManagerFactory emf;
-    private EntityManager em;
 
-    public PatientDAO() {
-
-        IConnectionDB connection = new ConnectionDB();
-        emf = connection.createConnection();
-        em = emf.createEntityManager();
+    @Override
+    public void registerPatient(NewPatientDTO newPatientDTO) {
+        //  PatientEntity patient = DtoToEntity(newPatientDTO);
 
     }
 
+    /*
     @Override
     public PatientEntity findPatient(Long id) {
 
@@ -54,16 +38,7 @@ public class PatientDAO implements IPatientDAO {
 
     }
 
-    @Override
-    public void registerPatient(NewPatientDTO newPatientDTO) {
-        PatientEntity patient = DtoToEntity(newPatientDTO);
-        em.getTransaction().begin();
-        em.persist(patient);
-        em.getTransaction().commit();
-//        em.close();
-//        emf.close();
 
-    }
 
     @Override
     public PatientEntity serachPatientById(Long idPatient) {
@@ -152,7 +127,7 @@ public class PatientDAO implements IPatientDAO {
 
         return patient;
     }
-
+     */
     public static PatientDAO getInstance() {
         return new PatientDAO() {
         };

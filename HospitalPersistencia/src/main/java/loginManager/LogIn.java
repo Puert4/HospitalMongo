@@ -1,71 +1,48 @@
 package loginManager;
 
-import JPAEntities.UserAdministrator;
-import JPAEntities.UserDoctor;
-import JPAEntities.UserEntity;
-import JPAEntities.UserPatient;
+import com.mongodb.client.MongoDatabase;
 import connection.ConnectionDB;
-import connection.IConnectionDB;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
+import org.bson.Document;
 
 public abstract class LogIn implements ILogIn {
 
     private static final Logger LOGGER = Logger.getLogger(LogIn.class.getName());
-    private EntityManagerFactory emf;
-    private EntityManager em;
+    private static final MongoDatabase database = ConnectionDB.getDatabase();
 
     private LogIn() {
-
-        IConnectionDB connection = new ConnectionDB();
-        emf = connection.createConnection();
-        em = emf.createEntityManager();
-
     }
 
     @Override
     public Long validateUser(String user, String password) {
 
         try {
-            // Consulta para buscar al usuario por nombre de usuario
-            TypedQuery<UserEntity> consultUser = em.createQuery("SELECT u FROM UserEntity u WHERE u.user = :user", UserEntity.class);
-            consultUser.setParameter("user", user);
+            Document query = new Document("user", user);
+            Document userDocument = database.getCollection("users").find(query).first();
 
-            UserEntity userEntity = consultUser.getSingleResult();
+            if (userDocument != null && userDocument.getString("password").equals(password)) {
+                LOGGER.log(Level.INFO, "User Validated");
 
-            // Verificar si se encontró un usuario y si la contraseña es correcta
-            if (userEntity != null && userEntity.getPassword().equals(password)) {
-                LOGGER.log(Level.INFO, "Usuario Validado");
-
-                if (userEntity instanceof UserPatient) {
-
-                    return ((UserPatient) userEntity).getPatient().getId();
-                } else if (userEntity instanceof UserAdministrator) {
-
-                    return 0L;
-                } else if (userEntity instanceof UserDoctor) {
-                    return ((UserDoctor) userEntity).getDoctor().getId();
-                } else {
-
-                    return null;
+                // Determine user type and return corresponding ID
+                String userType = userDocument.getString("type");
+                switch (userType) {
+                    case "PATIENT":
+                        return userDocument.getLong("patientId");
+                    case "ADMIN":
+                        return 0L;
+                    case "DOCTOR":
+                        return userDocument.getLong("doctorId");
+                    default:
+                        return null;
                 }
             } else {
-                LOGGER.log(Level.INFO, "Contraseña Inválida o Usuario Inexistente");
+                LOGGER.log(Level.INFO, "Invalid Password or User Not Found");
                 return null;
             }
-        } catch (NoResultException e) {
-            LOGGER.log(Level.INFO, "Usuario Inválido o Inexistente");
-            return null;
         } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error al validar", e);
+            LOGGER.log(Level.SEVERE, "Error validating user", e);
             return null;
-        } finally {
-//            em.close();
-//            emf.close();
         }
     }
 

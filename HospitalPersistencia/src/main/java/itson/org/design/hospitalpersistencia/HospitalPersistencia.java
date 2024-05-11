@@ -1,9 +1,7 @@
 package itson.org.design.hospitalpersistencia;
 
-import JPAEntities.AppointmentEntity;
-import JPAEntities.DoctorEntity;
-import JPAEntities.PatientEntity;
-import JPAEntities.Specialization;
+
+/*
 import administrator.system.IAdministratorDAO;
 import administrator.system.newAdministratorDTO;
 import appointment.system.AppointmentManager;
@@ -28,7 +26,7 @@ import patient.system.PatientDAO;
 import user.system.IUserDAO;
 import user.system.UserDAO;
 import user.system.NewUserDTO;
-
+ */
 /**
  *
  * @author Laboratorios
@@ -220,7 +218,7 @@ public class HospitalPersistencia {
         }
 
          */
-        AppointmentManager appointmentManager = AppointmentManager.getInstance();
+   //     AppointmentManager appointmentManager = AppointmentManager.getInstance();
 
         /*
         // Supongamos que tienes el ID del paciente
@@ -236,6 +234,7 @@ public class HospitalPersistencia {
 
          */
         // Assuming you have a patient ID
+        /*
         Long patientId = 1L; // Replace 123L with the actual patient ID
 
         // Retrieve appointments for the specified patient ID
@@ -253,5 +252,6 @@ public class HospitalPersistencia {
             System.out.println("Note: " + appointment.getNote());
             System.out.println("----------------------------------");
         }
+         */
     }
 }

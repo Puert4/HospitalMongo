@@ -1,10 +1,10 @@
 package doctor.system;
 
-import JPAEntities.DoctorEntity;
-import JPAEntities.Specialization;
-import java.util.List;
+
 
 public interface IDoctorDAO {
+
+    /*
 
     public void registerDoctor(NewDoctorDTO doctorDTO);
 
@@ -22,4 +22,5 @@ public interface IDoctorDAO {
 
     public Specialization setSpecilaization(String string);
 
+     */
 }

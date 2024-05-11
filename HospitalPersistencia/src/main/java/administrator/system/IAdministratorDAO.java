@@ -1,10 +1,8 @@
 package administrator.system;
 
-import JPAEntities.AdministratorEntity;
-import JPAEntities.UserAdministrator;
-
-
 public interface IAdministratorDAO {
+
+    /*
 
     public void registerAdministrator(newAdministratorDTO administratorDTO);
 
@@ -16,4 +14,5 @@ public interface IAdministratorDAO {
 
     public UserAdministrator findAdministratorById(Long id);
 
+     */
 }

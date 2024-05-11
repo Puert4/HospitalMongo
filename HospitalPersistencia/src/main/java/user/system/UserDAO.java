@@ -1,75 +1,61 @@
 package user.system;
 
-import JPAEntities.AdministratorEntity;
-import JPAEntities.DoctorEntity;
-import JPAEntities.PatientEntity;
-import JPAEntities.UserAdministrator;
-import JPAEntities.UserDoctor;
-import JPAEntities.UserEntity;
-import JPAEntities.UserPatient;
-import administrator.system.IAdministratorDAO;
-import administrator.system.newAdministratorDTO;
-import connection.ConnectionDB;
-import connection.IConnectionDB;
-import doctor.system.IDoctorDAO;
-import doctor.system.NewDoctorDTO;
-import factory.Factory;
-import java.util.List;
-import java.util.logging.Level;
+import com.mongodb.client.MongoCollection;
 import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
-import patient.system.IPatientDAO;
-import patient.system.PatientDAO;
+import entities.User;
+import connection.ConnectionDB;
+import java.util.logging.Level;
+import org.bson.types.ObjectId;
 
 /**
  *
  * @author TeLesheo
  */
 public class UserDAO implements IUserDAO {
-
-    private static final Logger LOGGER = Logger.getLogger(PatientDAO.class.getName());
-    private EntityManagerFactory emf;
-    private EntityManager em;
-
+    
+    private final MongoCollection<User> userCollection;
+    private static final Logger LOGGER = Logger.getLogger(UserDAO.class.getName());
+    
     private UserDAO() {
-
-        IConnectionDB connection = new ConnectionDB();
-        emf = connection.createConnection();
-        em = emf.createEntityManager();
-
+        this.userCollection = ConnectionDB.getDatabase().getCollection("user", User.class);
     }
-
+    
     @Override
-    public void registerUser(NewUserDTO userDTO) {
-        UserEntity user = DtoToEntity(userDTO);
-        em.getTransaction().begin();
-        em.persist(user);
-        em.getTransaction().commit();
-//        em.close();
-//        emf.close();
+    public void registerUser(NewUserDTO newUserDTO) {
+        try {
+            User user = DtoToEntity(newUserDTO);
+            userCollection.insertOne(user);
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, "Error al guardar usuario", ex);
+        }
     }
-
-    //aqui hice cambios de UserEntity a UserPatient
+    
     @Override
-    public UserEntity DtoToEntity(NewUserDTO userDTO) {
-        IPatientDAO patientD = Factory.getPatientDAO();
-        UserPatient user = new UserPatient();
-        user.setUser(userDTO.getUser());
-        user.setPassword(userDTO.getPassword());
-        PatientEntity patient = patientD.searchPatientByCurp(userDTO.getPatientDTO().getCurp());
-        user.setPatient(patient);
+    public User DtoToEntity(NewUserDTO newUserDTO) {
+        try {
+            User user = new User();
+            user.setId(new ObjectId());
+            user.setPassword(newUserDTO.getPassword());
+            user.setUser(newUserDTO.getUser());
+            user.setUserType(newUserDTO.getUserType());
 
-        return user;
+            /*
+            if (user.getUserType() == "PATIENT") {
+                user.setPatient(newUserDTO.getPatientDTO());
+            } else if (user.getUserType() == "DOCTOR") {
+                user.setDoctor(newUserDTO.getDoctorDTO());
+            } else if (user.getUserType() == "ADMIN") {
+                user.setAdministrator(newUserDTO.getAdministratorDTO());
+            }
+             */
+            return user;
+        } catch (Exception ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, "Error al convertir usuarioDTO", ex);
+            return null;
+        }
     }
 
-    public static UserDAO getInstance() {
-        return new UserDAO() {
-        };
-    }
-
+    /*
     @Override
     public void registerAdminUser(newAdministratorDTO administratorDTO, NewUserDTO userDTO) {
         IAdministratorDAO administratorD = Factory.getAdministratorDAO();
@@ -88,6 +74,8 @@ public class UserDAO implements IUserDAO {
 //        emf.close();
 
     }
+     */
+ /*
 
     @Override
     public String getUserType(Long userId) {
@@ -112,6 +100,9 @@ public class UserDAO implements IUserDAO {
 
         return null;
     }
+
+     */
+ /*
 
     @Override
     public boolean userExist(String user) {
@@ -140,7 +131,8 @@ public class UserDAO implements IUserDAO {
         }
 
     }
-
+     */
+ /*
     @Override
     public Long validateUser(String user, String password) {
 
@@ -159,18 +151,21 @@ public class UserDAO implements IUserDAO {
                 LOGGER.log(Level.INFO, "Contraseña Inválida o Usuario Inexistente");
                 return null;
             }
-        } catch (NoResultException e) {
+        } catch (Exception e) {
             LOGGER.log(Level.INFO, "Usuario Inválido o Inexistente");
             return null;
-        } catch (Exception e) {
-            LOGGER.log(Level.SEVERE, "Error al validar", e);
-            return null;
-        } finally {
-//            em.close();
-//            emf.close();
+//        } catch (Exception e) {
+//            LOGGER.log(Level.SEVERE, "Error al validar", e);
+//            return null;
+//        } finally {
+////            em.close();
+////            emf.close();
         }
     }
+    
+     */
 
+ /*
     @Override
     public UserEntity findUserByUserPassword(String user, String password) {
 
@@ -201,6 +196,9 @@ public class UserDAO implements IUserDAO {
         }
     }
 
+     */
+ /*
+    
     @Override
     public String getUserTypeByUserAndPassword(String user, String password) {
 
@@ -237,6 +235,9 @@ public class UserDAO implements IUserDAO {
         return null;
     }
 
+     */
+ /*
+
     @Override
     public void registerDoctorUser(NewDoctorDTO newDoctorDTO, NewUserDTO userDTO) {
         IDoctorDAO doctorD = Factory.getDoctorDAO();
@@ -248,12 +249,11 @@ public class UserDAO implements IUserDAO {
         DoctorEntity doctor = doctorD.searchByMedicart(userDTO.getDoctorDTO().getMedicalCart());
         user.setDoctor(doctor);
 
-        em.getTransaction().begin();
-        em.persist(user);
-        em.getTransaction().commit();
-//        em.close();
-//        emf.close();
-
     }
-
+     */
+    public static UserDAO getInstance() {
+        return new UserDAO() {
+        };
+    }
+    
 }
