@@ -22,6 +22,9 @@ public class Patient {
     private String colony;
     private Integer zipCode;
 
+    public Patient() {
+    }
+
     public Patient(ObjectId id, String names, String firstName, String secondName, Date birthDate, String sex, String curp, String socialNumber, String phone, String street, String colony, Integer zipCode) {
         this.id = id;
         this.names = names;

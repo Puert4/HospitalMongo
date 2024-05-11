@@ -1,35 +1,39 @@
 package user.system;
 
+import administrator.system.IAdministratorDAO;
 import com.mongodb.client.MongoCollection;
 import java.util.logging.Logger;
 import entities.User;
 import connection.ConnectionDB;
+import doctor.system.IDoctorDAO;
+import factory.Factory;
 import java.util.logging.Level;
 import org.bson.types.ObjectId;
+import patient.system.IPatientDAO;
 
 /**
  *
  * @author TeLesheo
  */
 public class UserDAO implements IUserDAO {
-    
+
     private final MongoCollection<User> userCollection;
     private static final Logger LOGGER = Logger.getLogger(UserDAO.class.getName());
-    
+
     private UserDAO() {
         this.userCollection = ConnectionDB.getDatabase().getCollection("user", User.class);
     }
-    
+
     @Override
     public void registerUser(NewUserDTO newUserDTO) {
         try {
             User user = DtoToEntity(newUserDTO);
             userCollection.insertOne(user);
         } catch (Exception ex) {
-            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, "Error al guardar usuario", ex);
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, "Error @ register user", ex);
         }
     }
-    
+
     @Override
     public User DtoToEntity(NewUserDTO newUserDTO) {
         try {
@@ -38,16 +42,19 @@ public class UserDAO implements IUserDAO {
             user.setPassword(newUserDTO.getPassword());
             user.setUser(newUserDTO.getUser());
             user.setUserType(newUserDTO.getUserType());
+            //Se transforma a entidad y agrega al user
 
-            /*
             if (user.getUserType() == "PATIENT") {
-                user.setPatient(newUserDTO.getPatientDTO());
+                IPatientDAO patientDAO = Factory.getPatientDAO();
+                user.setPatient(patientDAO.DtoToEntity(newUserDTO.getPatientDTO()));
             } else if (user.getUserType() == "DOCTOR") {
-                user.setDoctor(newUserDTO.getDoctorDTO());
+                IDoctorDAO doctorDAO = Factory.getDoctorDAO();
+                user.setDoctor(doctorDAO.DtoToEntity(newUserDTO.getDoctorDTO()));
             } else if (user.getUserType() == "ADMIN") {
-                user.setAdministrator(newUserDTO.getAdministratorDTO());
+                IAdministratorDAO administratorDAO = Factory.getAdministratorDAO();
+                user.setAdministrator(administratorDAO.DtoToEntity(newUserDTO.getAdministratorDTO()));
             }
-             */
+
             return user;
         } catch (Exception ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, "Error al convertir usuarioDTO", ex);
@@ -255,5 +262,5 @@ public class UserDAO implements IUserDAO {
         return new UserDAO() {
         };
     }
-    
+
 }

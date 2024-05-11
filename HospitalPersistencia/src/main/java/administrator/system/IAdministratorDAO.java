@@ -1,12 +1,16 @@
 package administrator.system;
 
+import entities.Administrator;
+
 public interface IAdministratorDAO {
 
     /*
 
     public void registerAdministrator(newAdministratorDTO administratorDTO);
-
-    public AdministratorEntity DtoToEntity(newAdministratorDTO administratorDTO);
+    
+     */
+    public Administrator DtoToEntity(AdministratorDTO administratorDTO);
+    /*
 
     public ExistentAdministratorDTO EntityToDto(AdministratorEntity administrator);
 

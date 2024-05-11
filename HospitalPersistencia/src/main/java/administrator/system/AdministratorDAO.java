@@ -1,7 +1,6 @@
 package administrator.system;
 
-
-
+import entities.Administrator;
 
 public class AdministratorDAO implements IAdministratorDAO {
 
@@ -27,15 +26,15 @@ public class AdministratorDAO implements IAdministratorDAO {
         em.getTransaction().commit();
 
     }
-
+     */
     @Override
-    public AdministratorEntity DtoToEntity(newAdministratorDTO administratorDTO) {
-        AdministratorEntity adminisrator = new AdministratorEntity();
-
+    public Administrator DtoToEntity(AdministratorDTO administratorDTO) {
+        Administrator adminisrator = new Administrator();
         adminisrator.setNames(administratorDTO.getName());
-
         return adminisrator;
     }
+
+    /*
 
     @Override
     public ExistentAdministratorDTO EntityToDto(AdministratorEntity administrator) {
@@ -67,9 +66,12 @@ public class AdministratorDAO implements IAdministratorDAO {
         }
     }
 
+
+    }
+     */
     public static AdministratorDAO getInstance() {
         return new AdministratorDAO() {
         };
     }
-     */
+
 }

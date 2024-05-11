@@ -1,5 +1,6 @@
 package patient.system;
 
+import entities.Patient;
 import java.util.logging.Logger;
 
 public class PatientDAO implements IPatientDAO {
@@ -7,7 +8,7 @@ public class PatientDAO implements IPatientDAO {
     private static final Logger LOGGER = Logger.getLogger(PatientDAO.class.getName());
 
     @Override
-    public void registerPatient(NewPatientDTO newPatientDTO) {
+    public void registerPatient(PatientDTO newPatientDTO) {
         //  PatientEntity patient = DtoToEntity(newPatientDTO);
 
     }
@@ -89,10 +90,10 @@ public class PatientDAO implements IPatientDAO {
 
         return existentPatientDTO;
     }
-
+     */
     @Override
-    public PatientEntity DtoToEntity(NewPatientDTO newPatientDTO) {
-        PatientEntity patient = new PatientEntity();
+    public Patient DtoToEntity(PatientDTO newPatientDTO) {
+        Patient patient = new Patient();
 
         patient.setNames(newPatientDTO.getNames());
         patient.setFirstName(newPatientDTO.getFirstName());
@@ -109,6 +110,7 @@ public class PatientDAO implements IPatientDAO {
         return patient;
     }
 
+    /*
     @Override
     public PatientEntity ExistentDtoToEntity(ExistentPatientDTO existentPatientDTO) {
         PatientEntity patient = new PatientEntity();

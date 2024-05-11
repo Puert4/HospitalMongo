@@ -13,6 +13,7 @@ C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\j
 C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\java\factory\Factory.java
 C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\java\doctor\system\IDoctorDAO.java
 C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\java\administrator\system\newAdministratorDTO.java
+C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\java\patient\system\PatientDTO.java
 C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\java\loginManager\ILogIn.java
 C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\java\appointment\system\ExistentAppointmentDTO.java
 C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\java\entities\User.java
@@ -23,7 +24,6 @@ C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\j
 C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\java\user\system\ExistentUserDTO.java
 C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\java\entities\Patient.java
 C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\java\patient\system\IPatientDAO.java
-C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\java\patient\system\NewPatientDTO.java
 C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\java\administrator\system\AdministratorDAO.java
 C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\java\appointment\system\IAppointmentManager.java
 C:\Users\TeLesheo\Documents\GitHub\HospitalMongo\HospitalPersistencia\src\main\java\patient\system\PatientDAO.java

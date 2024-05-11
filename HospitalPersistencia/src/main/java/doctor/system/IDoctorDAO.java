@@ -1,14 +1,15 @@
 package doctor.system;
 
-
+import entities.Doctor;
 
 public interface IDoctorDAO {
 
     /*
 
     public void registerDoctor(NewDoctorDTO doctorDTO);
-
-    public DoctorEntity DtoToEntity(NewDoctorDTO doctorDTO);
+     */
+    public Doctor DtoToEntity(DoctorDTO doctorDTO);
+    /*
 
     public DoctorEntity ExistentDtoToEntity(ExistentDoctorDTO existentDoctorDTO);
 

@@ -1,36 +1,36 @@
 package user.system;
 
-import administrator.system.newAdministratorDTO;
-import doctor.system.NewDoctorDTO;
-import patient.system.NewPatientDTO;
+import administrator.system.AdministratorDTO;
+import doctor.system.DoctorDTO;
+import patient.system.PatientDTO;
 
 public class NewUserDTO {
 
     private String user;
     private String password;
-    private NewPatientDTO patientDTO;
-    private NewDoctorDTO doctorDTO;
-    private newAdministratorDTO administratorDTO;
+    private PatientDTO patientDTO;
+    private DoctorDTO doctorDTO;
+    private AdministratorDTO administratorDTO;
     private String userType;
 
     public NewUserDTO() {
     }
 
-    public NewUserDTO(String user, String password, NewPatientDTO patientDTO) {
+    public NewUserDTO(String user, String password, PatientDTO patientDTO) {
         this.user = user;
         this.password = password;
         this.patientDTO = patientDTO;
         this.userType = "PATIENT";
     }
 
-    public NewUserDTO(String user, String password, NewDoctorDTO doctorDTO) {
+    public NewUserDTO(String user, String password, DoctorDTO doctorDTO) {
         this.user = user;
         this.password = password;
         this.doctorDTO = doctorDTO;
         this.userType = "DOCTOR";
     }
 
-    public NewUserDTO(String user, String password, newAdministratorDTO administratorDTO) {
+    public NewUserDTO(String user, String password, AdministratorDTO administratorDTO) {
         this.user = user;
         this.password = password;
         this.administratorDTO = administratorDTO;
@@ -53,27 +53,27 @@ public class NewUserDTO {
         this.password = password;
     }
 
-    public NewPatientDTO getPatientDTO() {
+    public PatientDTO getPatientDTO() {
         return patientDTO;
     }
 
-    public void setPatientDTO(NewPatientDTO patientDTO) {
+    public void setPatientDTO(PatientDTO patientDTO) {
         this.patientDTO = patientDTO;
     }
 
-    public NewDoctorDTO getDoctorDTO() {
+    public DoctorDTO getDoctorDTO() {
         return doctorDTO;
     }
 
-    public void setDoctorDTO(NewDoctorDTO doctorDTO) {
+    public void setDoctorDTO(DoctorDTO doctorDTO) {
         this.doctorDTO = doctorDTO;
     }
 
-    public newAdministratorDTO getAdministratorDTO() {
+    public AdministratorDTO getAdministratorDTO() {
         return administratorDTO;
     }
 
-    public void setAdministratorDTO(newAdministratorDTO administratorDTO) {
+    public void setAdministratorDTO(AdministratorDTO administratorDTO) {
         this.administratorDTO = administratorDTO;
     }
 

@@ -1,5 +1,7 @@
 package patient.system;
 
+import entities.Patient;
+
 
 
 /**
@@ -8,7 +10,7 @@ package patient.system;
  */
 public interface IPatientDAO {
 
-    public void registerPatient(NewPatientDTO newPatient);
+    public void registerPatient(PatientDTO newPatient);
     
     /*
 
@@ -17,15 +19,19 @@ public interface IPatientDAO {
     public PatientEntity searchPatientByCurp(String curp);
 
     public ExistentPatientDTO EntityToDto(PatientEntity patient);
+*/
 
-    public PatientEntity DtoToEntity(NewPatientDTO newPatientDTO);
+    public Patient DtoToEntity(PatientDTO newPatientDTO);
+    
+    /*
 
     public PatientEntity ExistentDtoToEntity(ExistentPatientDTO existentPatientDTO);
     
     public List<ExistentPatientDTO> findAllPatient();
     
     public PatientEntity findPatient(Long id);
+    */
 
-*/
+
     
 }

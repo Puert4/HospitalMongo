@@ -1,13 +1,13 @@
 package administrator.system;
 
-public class newAdministratorDTO {
+public class AdministratorDTO {
 
     private String Name;
 
-    public newAdministratorDTO() {
+    public AdministratorDTO() {
     }
 
-    public newAdministratorDTO(String Name) {
+    public AdministratorDTO(String Name) {
         this.Name = Name;
     }
 

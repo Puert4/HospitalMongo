@@ -1,5 +1,7 @@
 package doctor.system;
 
+import entities.Doctor;
+
 public class DoctorDAO implements IDoctorDAO {
 
     /*
@@ -41,19 +43,22 @@ public class DoctorDAO implements IDoctorDAO {
         };
 
     }
-
+    
+     */
     @Override
-    public DoctorEntity DtoToEntity(NewDoctorDTO doctorDTO) {
+    public Doctor DtoToEntity(DoctorDTO doctorDTO) {
 
-        DoctorEntity doctor = new DoctorEntity();
-        doctor.setNames(doctorDTO.getName());
-        doctor.setFirstLastName(doctorDTO.getFirstName());
-        doctor.setSecondLastName(doctorDTO.getSecondName());
+        Doctor doctor = new Doctor();
+        doctor.setName(doctorDTO.getName());
+        doctor.setFirstLastName(doctorDTO.getFirstLastName());
+        doctor.setSecondLastName(doctorDTO.getSecondLastName());
         doctor.setMedicalCart(doctorDTO.getMedicalCart());
-        doctor.setSpecialization(pojo.Specialization.FAMILY);
+        doctor.setSpecialization(doctorDTO.getSpecialization());
 
         return doctor;
     }
+
+    /*
 
     @Override
     public DoctorEntity ExistentDtoToEntity(ExistentDoctorDTO existentDoctorDTO) {
@@ -111,10 +116,7 @@ public class DoctorDAO implements IDoctorDAO {
         }
     }
 
-    public static DoctorDAO getInstance() {
-        return new DoctorDAO() {
-        };
-    }
+
 
     @Override
     public List<ExistentDoctorDTO> searchBySpecialization(Specialization specialization) {
@@ -148,5 +150,9 @@ public class DoctorDAO implements IDoctorDAO {
         doctorDTO.setMedicalCart(doctorEntity.getMedicalCart());
         return doctorDTO;
     }
-*/
+     */
+    public static DoctorDAO getInstance() {
+        return new DoctorDAO() {
+        };
+    }
 }

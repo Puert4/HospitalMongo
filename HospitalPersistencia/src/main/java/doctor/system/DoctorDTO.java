@@ -1,6 +1,6 @@
 package doctor.system;
 
-public class NewDoctorDTO {
+public class DoctorDTO {
 
     private String name;
     private String firstLastName;
@@ -8,7 +8,10 @@ public class NewDoctorDTO {
     private String specialization;
     private String medicalCart;
 
-    public NewDoctorDTO(String name, String firstLastName, String secondLastName, String specialization, String medicalCart) {
+    public DoctorDTO() {
+    }
+
+    public DoctorDTO(String name, String firstLastName, String secondLastName, String specialization, String medicalCart) {
         this.name = name;
         this.firstLastName = firstLastName;
         this.secondLastName = secondLastName;

@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class ExistentPatientDTO {
 
-    private Long id;
     private String name;
     private String firstName;
     private String secondName;
@@ -21,20 +20,7 @@ public class ExistentPatientDTO {
     public ExistentPatientDTO() {
     }
 
-    public ExistentPatientDTO(Long id, String name, String firstName, String secondName, String curp, String phone, Calendar birthDate, String sex, String socialNumber) {
-        this.id = id;
-        this.name = name;
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.curp = curp;
-        this.phone = phone;
-        this.birthDate = birthDate;
-        this.sex = sex;
-        this.socialNumber = socialNumber;
-    }
-
-    public ExistentPatientDTO(Long id, String name, String firstName, String secondName, String curp, String phone, Calendar birthDate, String sex, String street, int zipCode, String colonia, String socialNumber) {
-        this.id = id;
+    public ExistentPatientDTO(String name, String firstName, String secondName, String curp, String phone, Calendar birthDate, String sex, String street, int zipCode, String colonia, String socialNumber) {
         this.name = name;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -46,54 +32,6 @@ public class ExistentPatientDTO {
         this.zipCode = zipCode;
         this.colonia = colonia;
         this.socialNumber = socialNumber;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public int getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
-    }
-
-    public String getColonia() {
-        return colonia;
-    }
-
-    public void setColonia(String colonia) {
-        this.colonia = colonia;
-    }
-
-    public String getSocialNumber() {
-        return socialNumber;
-    }
-
-    public void setSocialNumber(String socialNumber) {
-        this.socialNumber = socialNumber;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -144,11 +82,46 @@ public class ExistentPatientDTO {
         this.birthDate = birthDate;
     }
 
-    @Override
-    public String toString() {
-        return name + ", " + curp;
+    public String getSex() {
+        return sex;
     }
-    
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public int getZipCode() {
+        return zipCode;
+    }
+
+    public void setZipCode(int zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public String getColonia() {
+        return colonia;
+    }
+
+    public void setColonia(String colonia) {
+        this.colonia = colonia;
+    }
+
+    public String getSocialNumber() {
+        return socialNumber;
+    }
+
+    public void setSocialNumber(String socialNumber) {
+        this.socialNumber = socialNumber;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -191,12 +164,8 @@ public class ExistentPatientDTO {
         if (!Objects.equals(this.socialNumber, other.socialNumber)) {
             return false;
         }
-        if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
+
         return Objects.equals(this.birthDate, other.birthDate);
     }
 
-    
-    
 }

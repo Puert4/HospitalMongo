@@ -11,6 +11,9 @@ public class Doctor {
     private String specialization;
     private String medicalCart;
 
+    public Doctor() {
+    }
+
     public Doctor(ObjectId id, String name, String firstLastName, String secondLastName, String specialization, String medicalCart) {
         this.id = id;
         this.name = name;

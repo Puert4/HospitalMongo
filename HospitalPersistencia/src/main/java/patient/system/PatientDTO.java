@@ -1,37 +1,36 @@
 package patient.system;
 
-import java.util.Calendar;
+import java.util.Date;
 
-public class NewPatientDTO {
+public class PatientDTO {
 
     private String names;
     private String firstName;
     private String secondName;
     private String curp;
     private String phone;
-    private Calendar birthDate;
+    private Date birthDate;
     private String sex;
     private String street;
-    private int zipCode;
+    private Integer zipCode;
     private String colony;
     private String socialNumber;
 
-    public NewPatientDTO() {
+    public PatientDTO() {
     }
 
-    public NewPatientDTO(String names, String firstName, String secondName, Calendar birthDate, String sex, String curp, String socialNumber, String phone, String street, String colony, int zipCode) {
+    public PatientDTO(String names, String firstName, String secondName, String curp, String phone, Date birthDate, String sex, String street, Integer zipCode, String colony, String socialNumber) {
         this.names = names;
         this.firstName = firstName;
         this.secondName = secondName;
+        this.curp = curp;
+        this.phone = phone;
         this.birthDate = birthDate;
         this.sex = sex;
-        this.curp = curp;
-        this.socialNumber = socialNumber;
-        this.phone = phone;
         this.street = street;
-        this.colony = colony;
         this.zipCode = zipCode;
-
+        this.colony = colony;
+        this.socialNumber = socialNumber;
     }
 
     public String getNames() {
@@ -74,11 +73,11 @@ public class NewPatientDTO {
         this.phone = phone;
     }
 
-    public Calendar getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Calendar birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -98,11 +97,11 @@ public class NewPatientDTO {
         this.street = street;
     }
 
-    public int getZipCode() {
+    public Integer getZipCode() {
         return zipCode;
     }
 
-    public void setZipCode(int zipCode) {
+    public void setZipCode(Integer zipCode) {
         this.zipCode = zipCode;
     }
 

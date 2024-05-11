@@ -8,8 +8,21 @@ import org.bson.types.ObjectId;
  */
 public class Administrator {
 
-    private ObjectId id;
     private String names;
-    private ObjectId idUsuario;
-    
+
+    public Administrator() {
+    }
+
+    public Administrator(String names) {
+        this.names = names;
+    }
+
+    public String getNames() {
+        return names;
+    }
+
+    public void setNames(String names) {
+        this.names = names;
+    }
+
 }

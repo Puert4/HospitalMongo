@@ -1,7 +1,5 @@
 package appointment.system;
 
-
-
 public abstract class AppointmentManager implements IAppointmentManager {
 
     /*
@@ -189,10 +187,11 @@ public abstract class AppointmentManager implements IAppointmentManager {
         }
     }
 
+
+
+     */
     public static AppointmentManager getInstance() {
         return new AppointmentManager() {
         };
     }
-
-     */
 }

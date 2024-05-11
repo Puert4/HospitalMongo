@@ -19,8 +19,6 @@ import user.system.UserDAO;
  */
 public class Factory {
 
-    /*
-
     private static IPatientDAO patientDAO;
     private static IUserDAO userDAO;
     private static ILogIn logIn;
@@ -56,5 +54,4 @@ public class Factory {
         return administratorDAO == null ? (administratorDAO = AdministratorDAO.getInstance()) : administratorDAO;
     }
 
-     */
 }

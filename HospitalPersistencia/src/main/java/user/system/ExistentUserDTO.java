@@ -1,9 +1,9 @@
 package user.system;
 
-import administrator.system.newAdministratorDTO;
-import doctor.system.NewDoctorDTO;
+import administrator.system.AdministratorDTO;
+import doctor.system.DoctorDTO;
 import org.bson.types.ObjectId;
-import patient.system.NewPatientDTO;
+import patient.system.PatientDTO;
 
 /**
  *
@@ -15,11 +15,11 @@ public class ExistentUserDTO {
     private String user;
     private String password;
     private String userType;
-    private NewPatientDTO patientDTO;
-    private NewDoctorDTO doctorDTO;
-    private newAdministratorDTO administratorDTO;
+    private PatientDTO patientDTO;
+    private DoctorDTO doctorDTO;
+    private AdministratorDTO administratorDTO;
 
-    public ExistentUserDTO(ObjectId id, String user, String password, String userType, NewPatientDTO patientDTO) {
+    public ExistentUserDTO(ObjectId id, String user, String password, String userType, PatientDTO patientDTO) {
         this.id = id;
         this.user = user;
         this.password = password;
@@ -27,7 +27,7 @@ public class ExistentUserDTO {
         this.patientDTO = patientDTO;
     }
 
-    public ExistentUserDTO(ObjectId id, String user, String password, String userType, NewDoctorDTO doctorDTO) {
+    public ExistentUserDTO(ObjectId id, String user, String password, String userType, DoctorDTO doctorDTO) {
         this.id = id;
         this.user = user;
         this.password = password;
@@ -35,7 +35,7 @@ public class ExistentUserDTO {
         this.doctorDTO = doctorDTO;
     }
 
-    public ExistentUserDTO(ObjectId id, String user, String password, String userType, newAdministratorDTO administratorDTO) {
+    public ExistentUserDTO(ObjectId id, String user, String password, String userType, AdministratorDTO administratorDTO) {
         this.id = id;
         this.user = user;
         this.password = password;
@@ -75,27 +75,27 @@ public class ExistentUserDTO {
         this.userType = userType;
     }
 
-    public NewPatientDTO getPatientDTO() {
+    public PatientDTO getPatientDTO() {
         return patientDTO;
     }
 
-    public void setPatientDTO(NewPatientDTO patientDTO) {
+    public void setPatientDTO(PatientDTO patientDTO) {
         this.patientDTO = patientDTO;
     }
 
-    public NewDoctorDTO getDoctorDTO() {
+    public DoctorDTO getDoctorDTO() {
         return doctorDTO;
     }
 
-    public void setDoctorDTO(NewDoctorDTO doctorDTO) {
+    public void setDoctorDTO(DoctorDTO doctorDTO) {
         this.doctorDTO = doctorDTO;
     }
 
-    public newAdministratorDTO getAdministratorDTO() {
+    public AdministratorDTO getAdministratorDTO() {
         return administratorDTO;
     }
 
-    public void setAdministratorDTO(newAdministratorDTO administratorDTO) {
+    public void setAdministratorDTO(AdministratorDTO administratorDTO) {
         this.administratorDTO = administratorDTO;
     }
 
