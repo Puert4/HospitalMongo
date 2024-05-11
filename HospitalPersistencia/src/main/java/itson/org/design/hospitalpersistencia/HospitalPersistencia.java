@@ -6,6 +6,7 @@ import java.util.Date;
 import patient.system.PatientDTO;
 import user.system.IUserDAO;
 import user.system.NewUserDTO;
+import appointment.system.NewAppointmentDTO;
 
 /**
  *
@@ -35,6 +36,7 @@ public class HospitalPersistencia {
         userDAO.registerUser(userDTO);
 
          */
+ /*
         DoctorDTO doctorDTO = new DoctorDTO(
                 "Juan",
                 "Perez",
@@ -46,6 +48,11 @@ public class HospitalPersistencia {
         IUserDAO userDAO = Factory.getUserDAO();
         NewUserDTO userDTO = new NewUserDTO("Juan", "Juan", doctorDTO);
         userDAO.registerUser(userDTO);
-
+         */
+         
+        
+        NewAppointmentDTO appointmentDTO = new NewAppointmentDTO();
+        
+ 
     }
 }

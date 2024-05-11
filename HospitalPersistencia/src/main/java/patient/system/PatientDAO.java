@@ -1,16 +1,52 @@
 package patient.system;
 
+import com.mongodb.MongoException;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import connection.ConnectionDB;
 import entities.Patient;
+import entities.User;
+import java.util.logging.Filter;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.bson.conversions.Bson;
 
 public class PatientDAO implements IPatientDAO {
 
     private static final Logger LOGGER = Logger.getLogger(PatientDAO.class.getName());
+    private final MongoCollection<User> collectionUser;
+
+    public PatientDAO() {
+        this.collectionUser = ConnectionDB.getDatabase().getCollection("user", User.class);
+    }
 
     @Override
-    public void registerPatient(PatientDTO newPatientDTO) {
-        //  PatientEntity patient = DtoToEntity(newPatientDTO);
+    public Patient searchPatientByCurp(String curp) {
+        try {
 
+            Bson filter = Filters.eq("patient.curp", curp);
+
+            User user = collectionUser.find(filter).first();
+
+            Patient patient = new Patient();
+
+            patient.setNames(user.getPatient().getNames());
+            patient.setBirthDate(user.getPatient().getBirthDate());
+            patient.setSecondName(user.getPatient().getSecondName());
+            patient.setFirstName(user.getPatient().getFirstName());
+            patient.setSocialNumber(user.getPatient().getSecondName());
+            /*
+            patient.setColony(user.getPatient().getColony());
+            patient.setPhone(user.getPatient().getPhone());
+            patient.setZipCode(user.getPatient().getZipCode());
+       
+             */
+            return patient;
+
+        } catch (MongoException ex) {
+            LOGGER.log(Level.INFO, "Patient not found by curp");
+            return null;
+        }
     }
 
     /*
@@ -134,4 +170,5 @@ public class PatientDAO implements IPatientDAO {
         return new PatientDAO() {
         };
     }
+
 }

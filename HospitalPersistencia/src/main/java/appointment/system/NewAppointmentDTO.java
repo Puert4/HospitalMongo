@@ -1,13 +1,13 @@
 package appointment.system;
 
-import doctor.system.ExistentDoctorDTO;
+import doctor.system.DoctorDTO;
 import java.util.Calendar;
-import patient.system.ExistentPatientDTO;
+import patient.system.PatientDTO;
 
 public class NewAppointmentDTO {
 
-    private ExistentDoctorDTO doctor;
-    private ExistentPatientDTO patient;
+    private DoctorDTO doctor;
+    private PatientDTO patient;
     private Calendar appointmentDate;
     private String status;
     private String note;
@@ -15,7 +15,7 @@ public class NewAppointmentDTO {
     public NewAppointmentDTO() {
     }
 
-    public NewAppointmentDTO(ExistentDoctorDTO doctor, ExistentPatientDTO patient, Calendar appointmentDate, String status, String note) {
+    public NewAppointmentDTO(DoctorDTO doctor, PatientDTO patient, Calendar appointmentDate, String status, String note) {
         this.doctor = doctor;
         this.patient = patient;
         this.appointmentDate = appointmentDate;
@@ -23,19 +23,19 @@ public class NewAppointmentDTO {
         this.note = note;
     }
 
-    public ExistentDoctorDTO getDoctor() {
+    public DoctorDTO getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(ExistentDoctorDTO doctor) {
+    public void setDoctor(DoctorDTO doctor) {
         this.doctor = doctor;
     }
 
-    public ExistentPatientDTO getPatient() {
+    public PatientDTO getPatient() {
         return patient;
     }
 
-    public void setPatient(ExistentPatientDTO patient) {
+    public void setPatient(PatientDTO patient) {
         this.patient = patient;
     }
 

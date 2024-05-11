@@ -1,22 +1,23 @@
 package appointment.system;
 
-import doctor.system.ExistentDoctorDTO;
-import java.util.Calendar;
-import patient.system.ExistentPatientDTO;
+import doctor.system.DoctorDTO;
+import java.util.Date;
+import patient.system.PatientDTO;
 
 public class ExistentAppointmentDTO {
 
     private Long id;
-    private ExistentDoctorDTO doctor;
-    private ExistentPatientDTO patient;
-    private Calendar appointmentDate;
+    private DoctorDTO doctor;
+    private PatientDTO patient;
+    private Date appointmentDate;
     private String status;
     private String note;
 
     public ExistentAppointmentDTO() {
     }
 
-    public ExistentAppointmentDTO(ExistentDoctorDTO doctor, ExistentPatientDTO patient, Calendar appointmentDate, String status, String note) {
+    public ExistentAppointmentDTO(Long id, DoctorDTO doctor, PatientDTO patient, Date appointmentDate, String status, String note) {
+        this.id = id;
         this.doctor = doctor;
         this.patient = patient;
         this.appointmentDate = appointmentDate;
@@ -32,27 +33,27 @@ public class ExistentAppointmentDTO {
         this.id = id;
     }
 
-    public ExistentDoctorDTO getDoctor() {
+    public DoctorDTO getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(ExistentDoctorDTO doctor) {
+    public void setDoctor(DoctorDTO doctor) {
         this.doctor = doctor;
     }
 
-    public ExistentPatientDTO getPatient() {
+    public PatientDTO getPatient() {
         return patient;
     }
 
-    public void setPatient(ExistentPatientDTO patient) {
+    public void setPatient(PatientDTO patient) {
         this.patient = patient;
     }
 
-    public Calendar getAppointmentDate() {
+    public Date getAppointmentDate() {
         return appointmentDate;
     }
 
-    public void setAppointmentDate(Calendar appointmentDate) {
+    public void setAppointmentDate(Date appointmentDate) {
         this.appointmentDate = appointmentDate;
     }
 

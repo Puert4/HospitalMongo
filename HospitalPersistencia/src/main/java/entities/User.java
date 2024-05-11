@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.bson.types.ObjectId;
 
 /**
@@ -25,6 +27,7 @@ public class User {
         this.password = password;
         this.userType = userType;
         this.doctor = doctor;
+
     }
 
     public User(ObjectId id, String user, String password, String userType, Patient patient) {
@@ -33,6 +36,7 @@ public class User {
         this.password = password;
         this.userType = userType;
         this.patient = patient;
+
     }
 
     public User(ObjectId id, String user, String password, String userType, Administrator administrator) {
