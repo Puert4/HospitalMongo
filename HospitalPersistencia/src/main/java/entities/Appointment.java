@@ -16,6 +16,9 @@ public class Appointment {
     private String appointmentState;
     private String note;
 
+    public Appointment() {
+    }
+
     public Appointment(ObjectId id, Doctor doctor, Patient patient, Date appointmentDate, String appointmentState, String note) {
         this.id = id;
         this.doctor = doctor;

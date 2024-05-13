@@ -1,12 +1,17 @@
 package itson.org.design.hospitalpersistencia;
 
+import appointment.system.IAppointmentManager;
 import doctor.system.DoctorDTO;
 import factory.Factory;
 import java.util.Date;
 import patient.system.PatientDTO;
 import user.system.IUserDAO;
 import user.system.NewUserDTO;
-import appointment.system.NewAppointmentDTO;
+import appointment.system.AppointmentDTO;
+import doctor.system.IDoctorDAO;
+import entities.Doctor;
+import entities.Patient;
+import patient.system.IPatientDAO;
 
 /**
  *
@@ -49,10 +54,20 @@ public class HospitalPersistencia {
         NewUserDTO userDTO = new NewUserDTO("Juan", "Juan", doctorDTO);
         userDAO.registerUser(userDTO);
          */
-         
-        
-        NewAppointmentDTO appointmentDTO = new NewAppointmentDTO();
-        
- 
+ /*
+        //Se crea un appointmetn
+        IPatientDAO patientDAO = Factory.getPatientDAO();
+        PatientDTO patientDTO = patientDAO.EntityToDto(patientDAO.searchPatientByCurp("GOLJ910101HDFNRR02"));
+        System.out.println(patientDTO + " " + patientDTO.getNames());
+
+        IDoctorDAO doctorDAO = Factory.getDoctorDAO();
+        DoctorDTO doctorDTO = doctorDAO.EntityToDTO(doctorDAO.searchByMedicart("XXXXX"));
+
+        //  System.out.println(doctorDTO.getName() + " " + doctorDTO.getFirstLastName());
+        AppointmentDTO appointmentDTO = new AppointmentDTO(doctorDTO, patientDTO, new Date(), "ACTIVE", "Tummy Ack");
+
+        IAppointmentManager appointmentManager = Factory.getAppointmentManager();
+        appointmentManager.createAppointment(appointmentDTO);
+         */
     }
 }

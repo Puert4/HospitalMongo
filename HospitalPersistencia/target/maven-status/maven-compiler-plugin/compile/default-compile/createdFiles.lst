@@ -4,8 +4,8 @@ patient\system\ExistentPatientDTO.class
 user\system\ExistentUserDTO.class
 doctor\system\DoctorDAO$1.class
 appointment\system\IAppointmentManager.class
-appointment\system\NewAppointmentDTO.class
 loginManager\ILogIn.class
+appointment\system\AppointmentDTO.class
 entities\Appointment.class
 patient\system\PatientDAO$1.class
 entities\Patient.class

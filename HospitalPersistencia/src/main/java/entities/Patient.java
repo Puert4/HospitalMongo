@@ -9,7 +9,6 @@ import org.bson.types.ObjectId;
  */
 public class Patient {
 
-    private ObjectId id;
     private String names;
     private String firstName;
     private String secondName;
@@ -25,8 +24,7 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(ObjectId id, String names, String firstName, String secondName, Date birthDate, String sex, String curp, String socialNumber, String phone, String street, String colony, Integer zipCode) {
-        this.id = id;
+    public Patient(String names, String firstName, String secondName, Date birthDate, String sex, String curp, String socialNumber, String phone, String street, String colony, Integer zipCode) {
         this.names = names;
         this.firstName = firstName;
         this.secondName = secondName;
@@ -38,14 +36,6 @@ public class Patient {
         this.street = street;
         this.colony = colony;
         this.zipCode = zipCode;
-    }
-
-    public ObjectId getId() {
-        return id;
-    }
-
-    public void setId(ObjectId id) {
-        this.id = id;
     }
 
     public String getNames() {

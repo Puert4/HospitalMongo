@@ -36,4 +36,5 @@
         <maven.compiler.target>17</maven.compiler.target>
         <exec.mainClass>itson.org.design.hospitalinterfaz.HospitalInterfaz</exec.mainClass>
     </properties>
+    <name>HospitalInterfazM</name>
 </project>

@@ -1,18 +1,25 @@
 package doctor.system;
 
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import connection.ConnectionDB;
 import entities.Doctor;
+import entities.User;
+import java.util.List;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import org.bson.conversions.Bson;
 
 public class DoctorDAO implements IDoctorDAO {
 
-    /*
+    private static final Logger LOGGER = Logger.getLogger(DoctorDAO.class.getName());
+    private final MongoCollection<User> collectionUser;
+
     public DoctorDAO() {
-
-        IConnectionDB connection = new ConnectionDB();
-        emf = connection.createConnection();
-        em = emf.createEntityManager();
-
+        this.collectionUser = ConnectionDB.getDatabase().getCollection("user", User.class);
     }
 
+    /*
     @Override
     public void registerDoctor(NewDoctorDTO doctorDTO) {
         DoctorEntity doctor = DtoToEntity(doctorDTO);
@@ -79,45 +86,27 @@ public class DoctorDAO implements IDoctorDAO {
 
         }
     }
-
+     */
     @Override
-    public DoctorEntity searchByMedicart(String medicart) {
-
+    public Doctor searchByMedicart(String medicart) {
         try {
-            TypedQuery<DoctorEntity> query = em.createQuery("SELECT d FROM DoctorEntity d WHERE d.medicalCart = :medicalCart", DoctorEntity.class);
-            query.setParameter("medicalCart", medicart);
-            if (query.getSingleResult() == null) {
+            Bson filter = Filters.eq("doctor.medicalCart", medicart);
 
+            User user = collectionUser.find(filter).first();
+            if (user != null) {
+                return user.getDoctor();
+            } else {
                 JOptionPane.showMessageDialog(null, "The medicalCart has no owner");
                 return null;
-            } else {
-
-                List<DoctorEntity> resultList = query.getResultList();
-                int numResults = resultList.size();
-                if (numResults != 0 && query.getSingleResult() != null && 1 == 0) {
-
-                    JOptionPane.showMessageDialog(null, "The meidcalCart issss already in use");
-                    return null;
-                } else if (numResults == 1) {
-
-                    return query.getSingleResult();
-
-                }
-
             }
-            JOptionPane.showMessageDialog(null, "No solution");
-            return null;
-
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "The meidcalCart has been validated");
+            JOptionPane.showMessageDialog(null, "An error occurred while searching for the medicalCart");
             return null;
-        } finally {
-
         }
     }
 
 
-
+    /*
     @Override
     public List<ExistentDoctorDTO> searchBySpecialization(Specialization specialization) {
         List<ExistentDoctorDTO> doctorsDTO = new ArrayList<>();
@@ -139,18 +128,18 @@ public class DoctorDAO implements IDoctorDAO {
 
         return doctorsDTO;
     }
-
-    public ExistentDoctorDTO EntityToDTO(DoctorEntity doctorEntity) {
-        ExistentDoctorDTO doctorDTO = new ExistentDoctorDTO();
-        doctorDTO.setId(doctorEntity.getId());
-        doctorDTO.setName(doctorEntity.getNames());
-        doctorDTO.setFirstName(doctorEntity.getFirstLastName());
-        doctorDTO.setSecondName(doctorEntity.getSecondLastName());
+     */
+    public DoctorDTO EntityToDTO(Doctor doctorEntity) {
+        DoctorDTO doctorDTO = new DoctorDTO();
+        // doctorDTO.setId(doctorEntity.getId());
+        doctorDTO.setName(doctorEntity.getName());
+        doctorDTO.setFirstLastName(doctorEntity.getFirstLastName());
+        doctorDTO.setSecondLastName(doctorEntity.getSecondLastName());
         doctorDTO.setSpecialization(doctorEntity.getSpecialization());
         doctorDTO.setMedicalCart(doctorEntity.getMedicalCart());
         return doctorDTO;
     }
-     */
+
     public static DoctorDAO getInstance() {
         return new DoctorDAO() {
         };

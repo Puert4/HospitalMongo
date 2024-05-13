@@ -1,19 +1,109 @@
 package appointment.system;
 
+import com.mongodb.client.MongoCollection;
+import connection.ConnectionDB;
+import doctor.system.DoctorDAO;
+import doctor.system.DoctorDTO;
+import entities.Appointment;
+import java.util.logging.Logger;
+import patient.system.PatientDAO;
+import patient.system.PatientDTO;
+import appointment.system.ExistentAppointmentDTO;
+import doctor.system.IDoctorDAO;
+import entities.Doctor;
+import entities.Patient;
+import factory.Factory;
+import java.util.logging.Level;
+import patient.system.IPatientDAO;
+
 public abstract class AppointmentManager implements IAppointmentManager {
 
-    /*
-    private EntityManagerFactory emf;
-    private EntityManager em;
+    private static final Logger LOGGER = Logger.getLogger(PatientDAO.class.getName());
+    private final MongoCollection<Appointment> collectionAppointment;
 
-    private AppointmentManager() {
+    public AppointmentManager() {
+        this.collectionAppointment = ConnectionDB.getDatabase().getCollection("appointment", Appointment.class);
+    }
 
-        IConnectionDB connection = new ConnectionDB();
-        emf = connection.createConnection();
-        em = emf.createEntityManager();
+    /**
+     *
+     * @param AppointmentDTO
+     */
+    @Override
+    public void createAppointment(AppointmentDTO AppointmentDTO) {
+
+        try {
+            Appointment appointment = DtoToEntity(AppointmentDTO);
+
+            // Document appointmentDocument = appointmentToDocument(appointment);
+            collectionAppointment.insertOne(appointment);
+        } catch (Exception ex) {
+            Logger.getLogger(AppointmentManager.class.getName()).log(Level.SEVERE, "Error creating appointment", ex);
+
+        }
 
     }
 
+    /**
+     *
+     * @param appointment
+     * @return
+     */
+    public ExistentAppointmentDTO convertToDTO(Appointment appointment) {
+        try {
+            DoctorDAO doctorDAO = new DoctorDAO();
+            DoctorDTO doctorDTO = doctorDAO.EntityToDTO(doctorDAO.searchByMedicart(appointment.getDoctor().getMedicalCart()));
+
+            PatientDAO patientDAO = new PatientDAO();
+            PatientDTO patientDTO = patientDAO.EntityToDto(patientDAO.searchPatientByCurp(appointment.getPatient().getCurp()));
+
+            ExistentAppointmentDTO existentAppointmentDTO = new ExistentAppointmentDTO();
+            existentAppointmentDTO.setId(appointment.getId());
+            existentAppointmentDTO.setDoctor(doctorDTO);
+            existentAppointmentDTO.setPatient(patientDTO);
+            existentAppointmentDTO.setAppointmentDate(appointment.getAppointmentDate());
+            existentAppointmentDTO.setStatus(appointment.getAppointmentState().toString());
+            existentAppointmentDTO.setNote(appointment.getNote());
+
+            return existentAppointmentDTO;
+        } catch (Exception ex) {
+            Logger.getLogger(AppointmentManager.class.getName()).log(Level.SEVERE, "Error converting to DTO", ex);
+            return null;
+        }
+
+    }
+
+    /**
+     *
+     * @param appointmentDTO
+     * @return
+     */
+    public Appointment DtoToEntity(AppointmentDTO appointmentDTO) {
+
+        try {
+            IDoctorDAO doctorDAO = Factory.getDoctorDAO();
+            Doctor doctor = doctorDAO.searchByMedicart(appointmentDTO.getDoctor().getMedicalCart());
+
+            Appointment appointment = new Appointment();
+            appointment.setDoctor(doctor);
+
+            IPatientDAO patientD = Factory.getPatientDAO();
+            Patient patient = patientD.searchPatientByCurp(appointmentDTO.getPatient().getCurp());
+            appointment.setPatient(patient);
+
+            appointment.setAppointmentDate(appointmentDTO.getAppointmentDate());
+            appointment.setAppointmentState(appointmentDTO.getStatus());
+            appointment.setNote(appointmentDTO.getNote());
+
+            return appointment;
+        } catch (Exception ex) {
+            Logger.getLogger(AppointmentManager.class.getName()).log(Level.SEVERE, "Error converting to ", ex);
+            return null;
+        }
+
+    }
+
+    /*
     @Override
     public List<Calendar> findLimitDays(DoctorEntity doctorEntity) {
 
@@ -59,34 +149,9 @@ public abstract class AppointmentManager implements IAppointmentManager {
     }
 
     //REVISA
-    @Override
-    public void createAppointment(NewAppointmentDTO newAppointmentDTO) {
-        AppointmentEntity appointment = DtoToEntity(newAppointmentDTO);
 
-        em.getTransaction().begin();
-        em.persist(appointment);
-        em.getTransaction().commit();
 
-    }
 
-    @Override
-    public AppointmentEntity DtoToEntity(NewAppointmentDTO newAppointmentDTO) {
-
-        IDoctorDAO doctorDAO = Factory.getDoctorDAO();
-        DoctorEntity doctor = doctorDAO.serachById(newAppointmentDTO.getDoctor().getId());
-        AppointmentEntity appointment = new AppointmentEntity();
-        appointment.setDoctor(doctor);
-
-        IPatientDAO patientD = Factory.getPatientDAO();
-        PatientEntity patient = patientD.searchPatientByCurp(newAppointmentDTO.getPatient().getCurp());
-        appointment.setPatient(patient);
-
-        appointment.setAppointmentDate(newAppointmentDTO.getAppointmentDate());
-        appointment.setAppointmentState(AppointmentStateEntity.ACTIVE);
-        appointment.setNote(newAppointmentDTO.getNote());
-
-        return appointment;
-    }
 
     @Override
     public List<ExistentAppointmentDTO> findAppointmentsByPatientId(Long patientId) {
@@ -122,24 +187,7 @@ public abstract class AppointmentManager implements IAppointmentManager {
                 .collect(Collectors.toList());
     }
 
-    public ExistentAppointmentDTO convertToDTO(AppointmentEntity appointmentEntity) {
 
-        IDoctorDAO doctorDAO = Factory.getDoctorDAO();
-        ExistentDoctorDTO doctorDTO = doctorDAO.EntityToDTO(doctorDAO.serachById(appointmentEntity.getDoctor().getId()));
-
-        IPatientDAO patientDAO = Factory.getPatientDAO();
-        ExistentPatientDTO patientDTO = patientDAO.EntityToDto(patientDAO.serachPatientById(appointmentEntity.getPatient().getId()));
-
-        ExistentAppointmentDTO appointmentDTO = new ExistentAppointmentDTO();
-        appointmentDTO.setId(appointmentEntity.getId());
-        appointmentDTO.setDoctor(doctorDTO);
-        appointmentDTO.setPatient(patientDTO);
-        appointmentDTO.setAppointmentDate(appointmentEntity.getAppointmentDate());
-        appointmentDTO.setStatus(appointmentEntity.getAppointmentState().toString());
-        appointmentDTO.setNote(appointmentEntity.getNote());
-
-        return appointmentDTO;
-    }
 
     @Override
     public boolean cancelAppointment(Long appointmentId) {

@@ -2,11 +2,12 @@ package appointment.system;
 
 import doctor.system.DoctorDTO;
 import java.util.Date;
+import org.bson.types.ObjectId;
 import patient.system.PatientDTO;
 
 public class ExistentAppointmentDTO {
 
-    private Long id;
+    private ObjectId id;
     private DoctorDTO doctor;
     private PatientDTO patient;
     private Date appointmentDate;
@@ -16,7 +17,7 @@ public class ExistentAppointmentDTO {
     public ExistentAppointmentDTO() {
     }
 
-    public ExistentAppointmentDTO(Long id, DoctorDTO doctor, PatientDTO patient, Date appointmentDate, String status, String note) {
+    public ExistentAppointmentDTO(ObjectId id, DoctorDTO doctor, PatientDTO patient, Date appointmentDate, String status, String note) {
         this.id = id;
         this.doctor = doctor;
         this.patient = patient;
@@ -25,11 +26,11 @@ public class ExistentAppointmentDTO {
         this.note = note;
     }
 
-    public Long getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(ObjectId id) {
         this.id = id;
     }
 

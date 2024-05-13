@@ -1,14 +1,19 @@
 package appointment.system;
 
+import entities.Appointment;
 import java.util.Calendar;
 import java.util.List;
 
 public interface IAppointmentManager {
+
+    public void createAppointment(AppointmentDTO newAppointmentDTO);
+
+    public Appointment DtoToEntity(AppointmentDTO appointmentDTO);
+
+    public ExistentAppointmentDTO convertToDTO(Appointment appointmentEntity);
+
     /*
-
-    public void createAppointment(NewAppointmentDTO newAppointmentDTO);
-
-    public AppointmentEntity DtoToEntity(NewAppointmentDTO newAppointmentDTO);
+  
 
     public List<Calendar> findLimitDays(DoctorEntity doctorEntity);
 
@@ -17,7 +22,6 @@ public interface IAppointmentManager {
     // public List<AppointmentEntity> findAppointmentsByPatientId(Long patientId);
     public List<ExistentAppointmentDTO> findAppointmentsByPatientId(Long patientId);
 
-    public ExistentAppointmentDTO convertToDTO(AppointmentEntity appointmentEntity);
 
     public List<ExistentAppointmentDTO> findAppointmentsByDoctorId(Long doctorId);
 
@@ -26,5 +30,4 @@ public interface IAppointmentManager {
     public ExistentAppointmentDTO findAppointmentById(Long appointmentId);
 
      */
-
 }

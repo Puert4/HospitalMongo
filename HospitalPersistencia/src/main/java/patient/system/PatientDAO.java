@@ -6,6 +6,7 @@ import com.mongodb.client.model.Filters;
 import connection.ConnectionDB;
 import entities.Patient;
 import entities.User;
+import patient.system.PatientDTO;
 import java.util.logging.Filter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,23 +26,27 @@ public class PatientDAO implements IPatientDAO {
         try {
 
             Bson filter = Filters.eq("patient.curp", curp);
-
             User user = collectionUser.find(filter).first();
+            if (user == null) {
+                LOGGER.log(Level.INFO, "Patient not found by curp");
+                return null;
+            } else {
+                Patient patient = new Patient(
+                        user.getPatient().getNames(),
+                        user.getPatient().getFirstName(),
+                        user.getPatient().getSecondName(),
+                        user.getPatient().getBirthDate(),
+                        user.getPatient().getSex(),
+                        user.getPatient().getCurp(),
+                        user.getPatient().getSocialNumber(),
+                        user.getPatient().getPhone(),
+                        user.getPatient().getStreet(),
+                        user.getPatient().getColony(),
+                        user.getPatient().getZipCode()
+                );
 
-            Patient patient = new Patient();
-
-            patient.setNames(user.getPatient().getNames());
-            patient.setBirthDate(user.getPatient().getBirthDate());
-            patient.setSecondName(user.getPatient().getSecondName());
-            patient.setFirstName(user.getPatient().getFirstName());
-            patient.setSocialNumber(user.getPatient().getSecondName());
-            /*
-            patient.setColony(user.getPatient().getColony());
-            patient.setPhone(user.getPatient().getPhone());
-            patient.setZipCode(user.getPatient().getZipCode());
-       
-             */
-            return patient;
+                return patient;
+            }
 
         } catch (MongoException ex) {
             LOGGER.log(Level.INFO, "Patient not found by curp");
@@ -107,26 +112,26 @@ public class PatientDAO implements IPatientDAO {
 //            emf.close();
         }
     }
-
-    @Override
-    public ExistentPatientDTO EntityToDto(PatientEntity patient) {
-        ExistentPatientDTO existentPatientDTO = new ExistentPatientDTO();
-        existentPatientDTO.setId(patient.getId());
-        existentPatientDTO.setName(patient.getNames());
-        existentPatientDTO.setFirstName(patient.getFirstName());
-        existentPatientDTO.setSecondName(patient.getSecondName());
-        existentPatientDTO.setCurp(patient.getCurp());
-        existentPatientDTO.setPhone(patient.getPhone());
-        existentPatientDTO.setBirthDate(patient.getBirthDate());
-        existentPatientDTO.setSex(patient.getSex());
-        existentPatientDTO.setStreet(patient.getStreet());
-        existentPatientDTO.setZipCode(patient.getZipCode());
-        existentPatientDTO.setColonia(patient.getColony());
-        existentPatientDTO.setSocialNumber(patient.getSocialNumber());
-
-        return existentPatientDTO;
-    }
      */
+    @Override
+    public PatientDTO EntityToDto(Patient patient) {
+        PatientDTO PatientDTO = new PatientDTO();
+        //   existentPatientDTO.setId(patient.getId());
+        PatientDTO.setNames(patient.getNames());
+        PatientDTO.setFirstName(patient.getFirstName());
+        PatientDTO.setSecondName(patient.getSecondName());
+        PatientDTO.setCurp(patient.getCurp());
+        PatientDTO.setPhone(patient.getPhone());
+        PatientDTO.setBirthDate(patient.getBirthDate());
+        PatientDTO.setSex(patient.getSex());
+        PatientDTO.setStreet(patient.getStreet());
+        PatientDTO.setZipCode(patient.getZipCode());
+        PatientDTO.setColony(patient.getColony());
+        PatientDTO.setSocialNumber(patient.getSocialNumber());
+
+        return PatientDTO;
+    }
+
     @Override
     public Patient DtoToEntity(PatientDTO newPatientDTO) {
         Patient patient = new Patient();
