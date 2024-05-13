@@ -121,4 +121,9 @@ public class PatientDTO {
         this.socialNumber = socialNumber;
     }
 
+    @Override
+    public String toString() {
+        return names;
+    }
+
 }
