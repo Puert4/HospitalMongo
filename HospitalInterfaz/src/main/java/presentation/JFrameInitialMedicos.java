@@ -10,6 +10,7 @@ import doctor.system.IDoctorDAO;
 import factory.Factory;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.bson.types.ObjectId;
 import user.system.ExistentUserDTO;
@@ -34,7 +35,7 @@ public class JFrameInitialMedicos extends javax.swing.JFrame {
 
         IDoctorDAO doctorDAO = Factory.getDoctorDAO();
         //   existentDoctor = doctorDAO.EntityToDTO(doctorDAO.serachById(idDoctor));
-        //  cargarCitasPaciente();
+        cargarCitasPaciente();
     }
 
     /**
@@ -168,11 +169,13 @@ public class JFrameInitialMedicos extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        /*
+
         IAppointmentManager appointmentManager = Factory.getAppointmentManager();
         int selectedIndex = jTableAppointment.getSelectedRow();
+
+        // Asegurarse de que la fila seleccionada esté dentro de los límites
         if (selectedIndex >= 0 && selectedIndex < listaDeLongs.size()) {
-            Long valorCorrespondiente = listaDeLongs.get(selectedIndex);
+            ObjectId valorCorrespondiente = listaDeLongs.get(selectedIndex);
 
             if (appointmentManager.cancelAppointment(valorCorrespondiente)) {
 
@@ -184,7 +187,6 @@ public class JFrameInitialMedicos extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, "Index not valid", "Error", JOptionPane.ERROR_MESSAGE);
         }
-         */
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
