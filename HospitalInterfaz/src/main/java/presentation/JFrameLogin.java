@@ -6,6 +6,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import loginManager.ILogIn;
+import user.system.ExistentUserDTO;
 import user.system.IUserDAO;
 
 public class JFrameLogin extends javax.swing.JFrame {
@@ -235,27 +236,29 @@ public class JFrameLogin extends javax.swing.JFrame {
         IUserDAO userSystem = Factory.getUserDAO();
         ILogIn loginSystem = Factory.getLogIn();
 
-        String userType = userSystem.getUserTypeByUserAndPassword(user, password);
+        ExistentUserDTO existentUserDTO = new ExistentUserDTO();
 
-        if (userType != null) {
-            switch (userType) {
-                case "admin":
+        if (userSystem.userExist(user)) {
+            existentUserDTO = userSystem.EntitytoDTO(userSystem.findUserByUsernameAndPassword(user, password));
+
+            switch (existentUserDTO.getUserType()) {
+                case "ADMIN":
 
                     JFrameAdministrator frameAdministrator = new JFrameAdministrator(user, password);
                     frameAdministrator.setVisible(true);
                     this.dispose();
                     break;
-                case "patient":
+                case "PATIENT":
                     Long idPatient = loginSystem.validateUser(user, password);
-                    JFrameInitialPatient frameInitialPatient = new JFrameInitialPatient(idPatient);
+                    JFrameInitialPatient frameInitialPatient = new JFrameInitialPatient(existentUserDTO);
                     frameInitialPatient.setVisible(true);
                     this.dispose();
                     break;
 
-                case "doctor":
+                case "DOCTOR":
 
                     Long idDoctor = loginSystem.validateUser(user, password);
-                    JFrameInitialMedicos frameInitialMedicos = new JFrameInitialMedicos(idDoctor);
+                    JFrameInitialMedicos frameInitialMedicos = new JFrameInitialMedicos(existentUserDTO);
                     frameInitialMedicos.setVisible(true);
                     this.dispose();
                     break;
@@ -266,7 +269,7 @@ public class JFrameLogin extends javax.swing.JFrame {
             }
         } else {
 
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "User or Password doesn't exist", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
     }//GEN-LAST:event_btnAceptarActionPerformed

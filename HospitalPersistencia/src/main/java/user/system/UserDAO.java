@@ -2,12 +2,15 @@ package user.system;
 
 import administrator.system.IAdministratorDAO;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
 import java.util.logging.Logger;
 import entities.User;
 import connection.ConnectionDB;
 import doctor.system.IDoctorDAO;
 import factory.Factory;
+import static factory.Factory.administratorDAO;
 import java.util.logging.Level;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 import patient.system.IPatientDAO;
 
@@ -62,84 +65,58 @@ public class UserDAO implements IUserDAO {
         }
     }
 
+    @Override
+    public User findUserByUsernameAndPassword(String username, String password) {
+        try {
+            //Filter by username and password
+            Bson filter = Filters.and(
+                    Filters.eq("user", username),
+                    Filters.eq("password", password)
+            );
+
+            // Consults and returns the first found
+            return userCollection.find(filter).first();
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "Error searching for user", ex);
+            return null;
+        }
+    }
+
+    public ExistentUserDTO EntitytoDTO(User user) {
+        ExistentUserDTO ExistentUserDTO = new ExistentUserDTO();
+        ExistentUserDTO.setUser(user.getUser());
+        ExistentUserDTO.setPassword(user.getPassword());
+        ExistentUserDTO.setUserType(user.getUserType());
+
+        if ("PATIENT".equals(user.getUserType())) {
+            IPatientDAO patientDAO = Factory.getPatientDAO();
+
+            ExistentUserDTO.setPatientDTO(patientDAO.EntityToDto(user.getPatient()));
+        } else if ("DOCTOR".equals(user.getUserType())) {
+            IDoctorDAO doctorDAO = Factory.getDoctorDAO();
+            ExistentUserDTO.setDoctorDTO(doctorDAO.EntityToDTO(user.getDoctor()));
+        } //else if ("ADMIN".equals(user.getUserType())) {
+//            newUserDTO.setAdministratorDTO(administratorDAO.DtoToEntity(user.getAdministrator()));
+//        }
+
+        return ExistentUserDTO;
+    }
+
+    public boolean userExist(String username) {
+        try {
+
+            Bson filter = Filters.eq("user", username);
+
+            long count = userCollection.countDocuments(filter);
+
+            return count > 0;
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "Error checking if user exists", ex);
+            return false;
+        }
+    }
+
     /*
-    @Override
-    public void registerAdminUser(newAdministratorDTO administratorDTO, NewUserDTO userDTO) {
-        IAdministratorDAO administratorD = Factory.getAdministratorDAO();
-        administratorD.DtoToEntity(administratorDTO);
-        UserAdministrator user = new UserAdministrator();
-        user.setUser(userDTO.getUser());
-        user.setPassword(userDTO.getPassword());
-
-        AdministratorEntity administrator = administratorD.searchAdministratorByName(userDTO.getAdministratorDTO().getName());
-        user.setAdministrator(administrator);
-
-        em.getTransaction().begin();
-        em.persist(user);
-        em.getTransaction().commit();
-//        em.close();
-//        emf.close();
-
-    }
-     */
- /*
-
-    @Override
-    public String getUserType(Long userId) {
-
-        try {
-            UserEntity user = em.find(UserEntity.class, userId);
-            if (user != null) {
-                if (user instanceof UserAdministrator) {
-                    return "admin";
-                } else if (user instanceof UserPatient) {
-                    return "patient";
-                }
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        } finally {
-//            em.close();
-//            emf.close();
-        }
-
-        return null;
-    }
-
-     */
- /*
-
-    @Override
-    public boolean userExist(String user) {
-
-        try {
-
-            TypedQuery<UserEntity> consultUser = em.createQuery("SELECT u FROM UserEntity u WHERE u.user = :user", UserEntity.class);
-            consultUser.setParameter("user", user);
-            List<UserEntity> resultList = consultUser.getResultList();
-
-            int inUse = resultList.size();
-
-            if (inUse > 0) {
-
-                return true;
-            } else {
-                return false;
-            }
-        } catch (NoResultException e) {
-            return false;
-        } catch (Exception e) {
-            return false;
-        } finally {
-//            em.close();
-//            emf.close();
-        }
-
-    }
-     */
- /*
     @Override
     public Long validateUser(String user, String password) {
 
@@ -171,7 +148,6 @@ public class UserDAO implements IUserDAO {
     }
     
      */
-
  /*
     @Override
     public UserEntity findUserByUserPassword(String user, String password) {

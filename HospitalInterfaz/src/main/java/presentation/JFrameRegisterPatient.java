@@ -7,8 +7,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import patient.system.IPatientDAO;
-import patient.system.NewPatientDTO;
+import patient.system.PatientDTO;
 import user.system.IUserDAO;
 import user.system.NewUserDTO;
 
@@ -404,7 +403,7 @@ public class JFrameRegisterPatient extends javax.swing.JFrame {
         String phone = txtPhone.getText();
         String socialNumber = txtSecurityNumber.getText();
         String street = txtStreet.getText();
-        Calendar birthDate = dateChooser.getCalendar();
+        Date birthDate = dateChooser.getCalendar().getTime();
         String sex = "";
         if (cbxMale.isSelected()) {
             sex = "M";
@@ -425,19 +424,18 @@ public class JFrameRegisterPatient extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Names can only contain leters", "Error", JOptionPane.INFORMATION_MESSAGE);
         } else {
 
-            int zipCode = Integer.parseInt(zipCodeS);
-            NewPatientDTO newPatientDTO = new NewPatientDTO(
-                    names, firstName, secondName, birthDate, sex, curp, socialNumber, phone, street, colony, zipCode
-            );
-
             try {
-                //Creamos paciente nuevo
-                IPatientDAO patientSystem = Factory.getPatientDAO();
-                patientSystem.registerPatient(newPatientDTO);
+
+                int zipCode = Integer.parseInt(zipCodeS);
+                PatientDTO newPatientDTO = new PatientDTO(
+                        names, firstName, secondName, curp, phone, birthDate, sex, street, zipCode, socialNumber, colony);
+                userDTO.setPatientDTO(newPatientDTO);
+                System.out.println(userDTO.getPatientDTO().getNames());
 
                 IUserDAO userSystem = Factory.getUserDAO();
-                userDTO.setPatientDTO(newPatientDTO);
-                userSystem.registerUser(userDTO);
+
+                NewUserDTO newUserDTO = new NewUserDTO(userDTO.getUser(), userDTO.getPassword(), newPatientDTO);
+                userSystem.registerUser(newUserDTO);
 
             } catch (Exception ex) {
                 Logger.getLogger(JFrameRegisterPatient.class.getName()).log(Level.SEVERE, "Error al persistir", ex);

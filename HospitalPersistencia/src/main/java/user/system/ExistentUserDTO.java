@@ -19,6 +19,9 @@ public class ExistentUserDTO {
     private DoctorDTO doctorDTO;
     private AdministratorDTO administratorDTO;
 
+    public ExistentUserDTO() {
+    }
+
     public ExistentUserDTO(ObjectId id, String user, String password, String userType, PatientDTO patientDTO) {
         this.id = id;
         this.user = user;

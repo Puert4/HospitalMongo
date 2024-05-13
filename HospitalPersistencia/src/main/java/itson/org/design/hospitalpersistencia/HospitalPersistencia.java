@@ -11,7 +11,9 @@ import appointment.system.AppointmentDTO;
 import doctor.system.IDoctorDAO;
 import entities.Doctor;
 import entities.Patient;
+import entities.User;
 import patient.system.IPatientDAO;
+import user.system.ExistentUserDTO;
 
 /**
  *
@@ -21,7 +23,7 @@ public class HospitalPersistencia {
 
     public static void main(String[] args) {
 
-        /*
+        
         String names = "Juan";
         String firstName = "González";
         String secondName = "López";
@@ -40,7 +42,7 @@ public class HospitalPersistencia {
         NewUserDTO userDTO = new NewUserDTO("Carlos", "Carlos", patientDTO);
         userDAO.registerUser(userDTO);
 
-         */
+         
  /*
         DoctorDTO doctorDTO = new DoctorDTO(
                 "Juan",
@@ -69,5 +71,15 @@ public class HospitalPersistencia {
         IAppointmentManager appointmentManager = Factory.getAppointmentManager();
         appointmentManager.createAppointment(appointmentDTO);
          */
+ /*
+         //Buscar usuario
+        IUserDAO userDAO = Factory.getUserDAO();
+        User user = userDAO.findUserByUsernameAndPassword("Carlos", "Carlos");
+        System.out.println(user.getUserType() +" "+ user.getPatient().getNames());
+         */
+        IUserDAO userSystem = Factory.getUserDAO();
+        ExistentUserDTO existentUserDTO = new ExistentUserDTO();
+        existentUserDTO = userSystem.EntitytoDTO(userSystem.findUserByUsernameAndPassword("Carlos", "Carlos"));
+        System.out.println(existentUserDTO.getPatientDTO().getNames());
     }
 }

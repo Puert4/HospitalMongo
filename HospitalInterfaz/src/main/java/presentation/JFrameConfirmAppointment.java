@@ -1,46 +1,52 @@
 package presentation;
 
 import appointment.system.IAppointmentManager;
-import appointment.system.NewAppointmentDTO;
-import doctor.system.ExistentDoctorDTO;
+import appointment.system.AppointmentDTO;
+import doctor.system.DoctorDTO;
 import factory.Factory;
 import java.util.Calendar;
 import patient.system.ExistentPatientDTO;
+import patient.system.PatientDTO;
 
 public class JFrameConfirmAppointment extends javax.swing.JFrame {
 
-    private NewAppointmentDTO newAppointmentDTO;
-    private ExistentPatientDTO patientDTO;
-    private ExistentDoctorDTO doctorDTO;
+    private AppointmentDTO newAppointmentDTO;
+    private PatientDTO patientDTO;
+    private DoctorDTO doctorDTO;
 
     /**
      * Creates new form AgendarCita
      */
-    public JFrameConfirmAppointment(NewAppointmentDTO newAppointmentDTO, ExistentPatientDTO patientDTO) {
+    public JFrameConfirmAppointment(AppointmentDTO newAppointmentDTO, PatientDTO patientDTO) {
         this.patientDTO = patientDTO;
         this.newAppointmentDTO = newAppointmentDTO;
 
         initComponents();
-        this.lblName.setText(newAppointmentDTO.getPatient().getName());
+        this.lblName.setText(newAppointmentDTO.getPatient().getNames());
         this.lblDoctor.setText(newAppointmentDTO.getDoctor().getName());
-        String dateString = "" + newAppointmentDTO.getAppointmentDate().get(Calendar.DATE) + "/" + (newAppointmentDTO.getAppointmentDate().get(Calendar.MONTH)+1) + "/" + newAppointmentDTO.getAppointmentDate().get(Calendar.YEAR) + "  " + newAppointmentDTO.getAppointmentDate().get(Calendar.HOUR_OF_DAY) + ":00";
-        this.lblDate.setText(dateString);
+        //  String dateString = "" + newAppointmentDTO.getAppointmentDate().get(Calendar.DATE) + "/" + (newAppointmentDTO.getAppointmentDate().get(Calendar.MONTH) + 1) + "/" + newAppointmentDTO.getAppointmentDate().get(Calendar.YEAR) + "  " + newAppointmentDTO.getAppointmentDate().get(Calendar.HOUR_OF_DAY) + ":00";
+        // this.lblDate.setText(dateString);
         this.lblSpecialitazion.setText(newAppointmentDTO.getDoctor().getSpecialization().toString());
         this.lblNote.setText(newAppointmentDTO.getNote());
     }
 
-    public JFrameConfirmAppointment(NewAppointmentDTO newAppointmentDTO, ExistentDoctorDTO doctorDTO) {
+    public JFrameConfirmAppointment(AppointmentDTO newAppointmentDTO, DoctorDTO doctorDTO) {
 
+        /*
         this.doctorDTO = doctorDTO;
         this.newAppointmentDTO = newAppointmentDTO;
 
         initComponents();
-        this.lblName.setText(newAppointmentDTO.getPatient().getName());
+        this.lblName.setText(newAppointmentDTO.getPatient().getNames());
         this.lblDoctor.setText(newAppointmentDTO.getDoctor().getName());
-        String dateString = "" + newAppointmentDTO.getAppointmentDate().get(Calendar.DATE) + "/" + (newAppointmentDTO.getAppointmentDate().get(Calendar.MONTH)+1) + "/" + newAppointmentDTO.getAppointmentDate().get(Calendar.YEAR)  + "  " + newAppointmentDTO.getAppointmentDate().get(Calendar.HOUR_OF_DAY) + ":00";
+        //   String dateString = "" + newAppointmentDTO.getAppointmentDate().get(Calendar.DATE) + "/" + (newAppointmentDTO.getAppointmentDate().get(Calendar.MONTH) + 1) + "/" + newAppointmentDTO.getAppointmentDate().get(Calendar.YEAR) + "  " + newAppointmentDTO.getAppointmentDate().get(Calendar.HOUR_OF_DAY) + ":00";
+        String dateString = "" + newAppointmentDTO.getAppointmentDate().toString();
+
         this.lblDate.setText(dateString);
+
         this.lblSpecialitazion.setText(newAppointmentDTO.getDoctor().getSpecialization().toString());
         this.lblNote.setText(newAppointmentDTO.getNote());
+         */
     }
 
     /**
@@ -155,18 +161,22 @@ public class JFrameConfirmAppointment extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (doctorDTO == null) {
 
-            JFrameRegisterAppointment register = new JFrameRegisterAppointment(newAppointmentDTO, patientDTO);
-            register.setVisible(true);
-            this.dispose();
-        } else {
-            JFrameRegisterAppointment register = new JFrameRegisterAppointment(newAppointmentDTO, doctorDTO);
-            register.setVisible(true);
+            // JFrameRegisterAppointment register = new JFrameRegisterAppointment(newAppointmentDTO, patientDTO);
+            //  register.setVisible(true);
             this.dispose();
         }
+//        
+//        else {
+//            JFrameRegisterAppointment register = new JFrameRegisterAppointment(newAppointmentDTO, doctorDTO);
+//            register.setVisible(true);
+//            this.dispose();
+//        }
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmActionPerformed
         // TODO add your handling code here:
+
+        /*
         IAppointmentManager appointmentManager = Factory.getAppointmentManager();
         System.out.println(newAppointmentDTO.getAppointmentDate().get(Calendar.HOUR));
         appointmentManager.createAppointment(newAppointmentDTO);
@@ -181,6 +191,7 @@ public class JFrameConfirmAppointment extends javax.swing.JFrame {
             medic.setVisible(true);
             this.dispose();
         }
+         */
     }//GEN-LAST:event_btnConfirmActionPerformed
 
 //    /**

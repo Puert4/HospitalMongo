@@ -1,33 +1,33 @@
 package presentation;
 
-import appointment.system.ExistentAppointmentDTO;
-import appointment.system.IAppointmentManager;
-import doctor.system.ExistentDoctorDTO;
+//import appointment.system.ExistentAppointmentDTO;
+//import appointment.system.IAppointmentManager;
+import doctor.system.DoctorDTO;
 import doctor.system.IDoctorDAO;
 import factory.Factory;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-
+import user.system.ExistentUserDTO;
+//import java.util.Calendar;
+//import java.util.List;
+//import javax.swing.JOptionPane;
+//import javax.swing.table.DefaultTableModel;
 
 public class JFrameInitialMedicos extends javax.swing.JFrame {
 
     private Long idDoctor;
-    private ExistentDoctorDTO existentDoctor;
+    private DoctorDTO existentDoctor;
     private ArrayList<Long> listaDeLongs = new ArrayList<>();
 
     /**
      * Creates new form InicioPaciente
      */
-    public JFrameInitialMedicos(Long idDoctor) {
+    public JFrameInitialMedicos(ExistentUserDTO existenetUserDTo) {
         this.idDoctor = idDoctor;
         initComponents();
 
         IDoctorDAO doctorDAO = Factory.getDoctorDAO();
-        existentDoctor = doctorDAO.EntityToDTO(doctorDAO.serachById(idDoctor));
-        cargarCitasPaciente();
+        //   existentDoctor = doctorDAO.EntityToDTO(doctorDAO.serachById(idDoctor));
+        //  cargarCitasPaciente();
     }
 
     /**
@@ -37,6 +37,7 @@ public class JFrameInitialMedicos extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
 
+    /*
     private void cargarCitasPaciente() {
         DefaultTableModel tblModel = (DefaultTableModel) jTableAppointment.getModel();
         tblModel.setRowCount(0); // Limpiar la tabla antes de cargar los nuevos datos
@@ -56,6 +57,7 @@ public class JFrameInitialMedicos extends javax.swing.JFrame {
             listaDeLongs.add(appointment.getId());
         }
     }
+     */
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -149,29 +151,35 @@ public class JFrameInitialMedicos extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-            JFrameRegisterAppointment frameRegisterAppointment = new JFrameRegisterAppointment(existentDoctor);
-            frameRegisterAppointment.setVisible(true);
-            this.dispose();
+
+        /*
+        JFrameRegisterAppointment frameRegisterAppointment = new JFrameRegisterAppointment(existentDoctor);
+        frameRegisterAppointment.setVisible(true);
+        this.dispose();
+        
+         */
     }//GEN-LAST:event_jButton2ActionPerformed
+
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        /*
         IAppointmentManager appointmentManager = Factory.getAppointmentManager();
         int selectedIndex = jTableAppointment.getSelectedRow();
-
         if (selectedIndex >= 0 && selectedIndex < listaDeLongs.size()) {
             Long valorCorrespondiente = listaDeLongs.get(selectedIndex);
 
-            if(appointmentManager.cancelAppointment(valorCorrespondiente)){
-                
+            if (appointmentManager.cancelAppointment(valorCorrespondiente)) {
+
                 JOptionPane.showMessageDialog(this, "The appointment has been Successfully removed", "Success", JOptionPane.INFORMATION_MESSAGE);
                 cargarCitasPaciente();
-                
+
             }
 
         } else {
             JOptionPane.showMessageDialog(null, "Index not valid", "Error", JOptionPane.ERROR_MESSAGE);
         }
+         */
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

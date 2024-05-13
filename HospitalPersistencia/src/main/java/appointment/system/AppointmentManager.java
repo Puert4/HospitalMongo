@@ -13,7 +13,12 @@ import doctor.system.IDoctorDAO;
 import entities.Doctor;
 import entities.Patient;
 import factory.Factory;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
+import org.bson.Document;
+import org.bson.types.ObjectId;
 import patient.system.IPatientDAO;
 
 public abstract class AppointmentManager implements IAppointmentManager {
@@ -102,6 +107,28 @@ public abstract class AppointmentManager implements IAppointmentManager {
         }
 
     }
+
+    public List<ExistentAppointmentDTO> getAppointmentsByCurp(String curp) {
+        List<ExistentAppointmentDTO> appointments = new ArrayList<>();
+
+        try {
+            // Crear un filtro para buscar por el CURP del paciente
+            Document query = new Document("patient.curp", curp);
+
+            // Obtener las citas que coinciden con el filtro
+            List<Appointment> matchingAppointments = collectionAppointment.find(query).into(new ArrayList<>());
+
+            // Convertir las citas a DTO y agregarlas a la lista de retorno
+            for (Appointment appointment : matchingAppointments) {
+                appointments.add(convertToDTO(appointment));
+            }
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "Error, searching for appoinments by curp", ex);
+        }
+
+        return appointments;
+    }
+
 
     /*
     @Override

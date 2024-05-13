@@ -7,25 +7,24 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.bson.types.ObjectId;
 import patient.system.ExistentPatientDTO;
-import patient.system.IPatientDAO;
-
+import user.system.ExistentUserDTO;
 
 public class JFrameInitialPatient extends javax.swing.JFrame {
 
-    private final Long idPatient;
-    private ExistentPatientDTO paciente;
-    private ArrayList<Long> listaDeLongs = new ArrayList<>();
+    private ArrayList<ObjectId> listaDeLongs = new ArrayList<>();
+    private ExistentUserDTO existentUserDTO;
 
     /**
      * Creates new form InicioPaciente
      */
-    public JFrameInitialPatient(Long idPatient) {
-        this.idPatient = idPatient;
+    public JFrameInitialPatient(ExistentUserDTO existentUserDTO) {
+        this.existentUserDTO = existentUserDTO;
 
         initComponents();
-        IPatientDAO patientSystem = Factory.getPatientDAO();
-        paciente = patientSystem.EntityToDto(patientSystem.serachPatientById(idPatient));
+        //   IPatientDAO patientSystem = Factory.getPatientDAO();
+        //   paciente = patientSystem.EntityToDto(patientSystem.serachPatientById(idPatient));
         cargarCitasPaciente();
     }
 
@@ -35,7 +34,7 @@ public class JFrameInitialPatient extends javax.swing.JFrame {
 
         IAppointmentManager appointmentManager = Factory.getAppointmentManager();
 
-        List<ExistentAppointmentDTO> appointments = appointmentManager.findAppointmentsByPatientId(idPatient);
+        List<ExistentAppointmentDTO> appointments = appointmentManager.getAppointmentsByCurp(existentUserDTO.getPatientDTO().getCurp());
 
         for (ExistentAppointmentDTO appointment : appointments) {
             tblModel.addRow(new Object[]{
@@ -147,7 +146,7 @@ public class JFrameInitialPatient extends javax.swing.JFrame {
 
     private void btnCreateAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAppointmentActionPerformed
         // TODO add your handling code here:
-        JFrameRegisterAppointment register = new JFrameRegisterAppointment(paciente);
+        JFrameRegisterAppointment register = new JFrameRegisterAppointment(existentUserDTO.getPatientDTO());
         register.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCreateAppointmentActionPerformed
@@ -161,8 +160,9 @@ public class JFrameInitialPatient extends javax.swing.JFrame {
 
     private void btn_cancelAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelAppointmentActionPerformed
         // TODO add your handling code here:
-        
-        
+
+        /*
+
         IAppointmentManager appointmentManager = Factory.getAppointmentManager();
         int selectedIndex = jTableAppointment.getSelectedRow();
 
@@ -170,17 +170,17 @@ public class JFrameInitialPatient extends javax.swing.JFrame {
         if (selectedIndex >= 0 && selectedIndex < listaDeLongs.size()) {
             Long valorCorrespondiente = listaDeLongs.get(selectedIndex);
 
-            if(appointmentManager.cancelAppointment(valorCorrespondiente)){
-                
+            if (appointmentManager.cancelAppointment(valorCorrespondiente)) {
+
                 JOptionPane.showMessageDialog(this, "The appointment has been Successfully removed", "Success", JOptionPane.INFORMATION_MESSAGE);
                 cargarCitasPaciente();
-                
+
             }
-            
-            
+
         } else {
             JOptionPane.showMessageDialog(null, "Index not valid", "Error", JOptionPane.ERROR_MESSAGE);
         }
+         */
     }//GEN-LAST:event_btn_cancelAppointmentActionPerformed
 
 //    /**

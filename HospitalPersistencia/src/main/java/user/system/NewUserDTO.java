@@ -84,5 +84,7 @@ public class NewUserDTO {
     public void setUserType(String userType) {
         this.userType = userType;
     }
+    
+    
 
 }

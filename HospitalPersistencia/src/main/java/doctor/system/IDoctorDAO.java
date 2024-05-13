@@ -1,6 +1,7 @@
 package doctor.system;
 
 import entities.Doctor;
+import java.util.List;
 
 public interface IDoctorDAO {
 
@@ -20,10 +21,9 @@ public interface IDoctorDAO {
 
     public DoctorDTO EntityToDTO(Doctor doctorEntity);
 
-    /*
-    public List<ExistentDoctorDTO> searchBySpecialization(Specialization specialization);
+    public List<DoctorDTO> searchBySpecialization(String specialization);
 
-  
+    /*
 
     public Specialization setSpecilaization(String string);
 

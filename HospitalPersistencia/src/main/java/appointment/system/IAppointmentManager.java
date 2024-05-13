@@ -12,6 +12,8 @@ public interface IAppointmentManager {
 
     public ExistentAppointmentDTO convertToDTO(Appointment appointmentEntity);
 
+    public List<ExistentAppointmentDTO> getAppointmentsByCurp(String curp);
+
     /*
   
 

@@ -2,6 +2,7 @@ package presentation;
 
 import factory.Factory;
 import javax.swing.JOptionPane;
+import user.system.ExistentUserDTO;
 import user.system.IUserDAO;
 import user.system.NewUserDTO;
 
@@ -163,25 +164,31 @@ public class JFrameCreateUser extends javax.swing.JFrame {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
 
-        NewUserDTO userDTO = new NewUserDTO();
-        userDTO.setUser(txtUserName.getText());
-        userDTO.setPassword(txtPassword.getText());
+        NewUserDTO newUserDTO = new NewUserDTO();
 
-        IUserDAO userDAO = Factory.getUserDAO();
-        if (userDAO.userExist(userDTO.getUser())) {
+        String username = txtUserName.getText();
+        String password = txtPassword.getText();
+        newUserDTO.setUser(username);
+        newUserDTO.setPassword(password);
+
+        IUserDAO userSystem = Factory.getUserDAO();
+
+     //   ExistentUserDTO existentUserDTO = userSystem.EntitytoDTO(userSystem.findUserByUsernameAndPassword(username, password));
+        if (userSystem.userExist(username)) {
 
             JOptionPane.showMessageDialog(this, "The username is already in use");
 
         } else {
 
             if (userDTOAdmin == null) {
-
-                JFrameRegisterPatient frameRegisterPatient = new JFrameRegisterPatient(userDTO);
+               
+                JFrameRegisterPatient frameRegisterPatient = new JFrameRegisterPatient(newUserDTO);
                 frameRegisterPatient.setVisible(true);
                 this.dispose();
 
             } else {
-                JFrameRegisterPatient frameRegisterPatient = new JFrameRegisterPatient(userDTO, userDTOAdmin);
+
+                JFrameRegisterPatient frameRegisterPatient = new JFrameRegisterPatient(newUserDTO, userDTOAdmin);
                 frameRegisterPatient.setVisible(true);
                 this.dispose();
             }

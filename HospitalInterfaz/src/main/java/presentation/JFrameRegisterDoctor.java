@@ -2,8 +2,9 @@ package presentation;
 
 import factory.Factory;
 import doctor.system.IDoctorDAO;
-import doctor.system.NewDoctorDTO;
+import doctor.system.DoctorDTO;
 import javax.swing.JOptionPane;
+import user.system.ExistentUserDTO;
 import user.system.IUserDAO;
 import user.system.NewUserDTO;
 
@@ -231,29 +232,32 @@ comboBox.addActionListener(new java.awt.event.ActionListener() {
             JOptionPane.showMessageDialog(null, "Names can only contain leters", "Error", JOptionPane.INFORMATION_MESSAGE);
         } else {
 
-            NewDoctorDTO doctorDTO = new NewDoctorDTO(
+            DoctorDTO doctorDTO = new DoctorDTO(
                     names,
                     firstName,
                     secondName,
                     specialization,
                     medicalCart);
 
-            doctorDTO.setSpecialization(specialization);
-
+            //       doctorDTO.setSpecialization(specialization);
             IDoctorDAO doctorDAO = Factory.getDoctorDAO();
 
-            IUserDAO userDAO = Factory.getUserDAO();
+            IUserDAO userSystem = Factory.getUserDAO();
 
-            if (userDAO.userExist(user)) {
+            ExistentUserDTO existentUserDTO = new ExistentUserDTO();
+            existentUserDTO = userSystem.EntitytoDTO(userSystem.findUserByUsernameAndPassword(user, password));
+
+            if (existentUserDTO != null) {
 
                 JOptionPane.showMessageDialog(this, "The username is already in use");
 
             } else {
 
                 if (doctorDAO.searchByMedicart(doctorDTO.getMedicalCart()) == null) {
-                    doctorDAO.registerDoctor(doctorDTO);
+                  //  doctorDAO.registerDoctor(doctorDTO);
                     NewUserDTO userDTO = new NewUserDTO(user, password, doctorDTO);
-                    userDAO.registerDoctorUser(doctorDTO, userDTO);
+                 //   userDAO.registerDoctorUser(doctorDTO, userDTO);
+                 userSystem.registerUser(userDTO);
                     JFrameAdministrator frameAdministrator = new JFrameAdministrator(userDTOAdmin.getUser(), userDTOAdmin.getPassword());
                     frameAdministrator.setVisible(true);
                     this.dispose();

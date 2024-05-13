@@ -59,4 +59,9 @@ public class DoctorDTO {
         this.medicalCart = medicalCart;
     }
 
+    @Override
+    public String toString() {
+        return name;
+    }
+
 }

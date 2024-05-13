@@ -5,7 +5,9 @@ import com.mongodb.client.model.Filters;
 import connection.ConnectionDB;
 import entities.Doctor;
 import entities.User;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.bson.conversions.Bson;
@@ -19,39 +21,6 @@ public class DoctorDAO implements IDoctorDAO {
         this.collectionUser = ConnectionDB.getDatabase().getCollection("user", User.class);
     }
 
-    /*
-    @Override
-    public void registerDoctor(NewDoctorDTO doctorDTO) {
-        DoctorEntity doctor = DtoToEntity(doctorDTO);
-        doctor.setSpecialization(setSpecilaization(doctorDTO.getSpecialization()));
-        em.getTransaction().begin();
-        em.persist(doctor);
-        em.getTransaction().commit();
-
-    }
-
-    public Specialization setSpecilaization(String string) {
-
-        return switch (string) {
-            case "PEDIATRIC" ->
-                Specialization.PEDIATRIC;
-            case "SURGERY" ->
-                Specialization.SURGERY;
-            case "PSYCHIATRY" ->
-                Specialization.PSYCHIATRY;
-            case "ANESTHIOLOGY" ->
-                Specialization.ANESTHIOLOGY;
-            case "FAMILY" ->
-                Specialization.FAMILY;
-            case "CARDIOLOGY" ->
-                Specialization.CARDIOLOGY;
-            default ->
-                null;
-        };
-
-    }
-    
-     */
     @Override
     public Doctor DtoToEntity(DoctorDTO doctorDTO) {
 
@@ -105,30 +74,22 @@ public class DoctorDAO implements IDoctorDAO {
         }
     }
 
-
-    /*
     @Override
-    public List<ExistentDoctorDTO> searchBySpecialization(Specialization specialization) {
-        List<ExistentDoctorDTO> doctorsDTO = new ArrayList<>();
-
+    public List<DoctorDTO> searchBySpecialization(String specialization) {
+        List<DoctorDTO> doctorsDTO = new ArrayList<>();
         try {
-            TypedQuery<DoctorEntity> query = em.createQuery("SELECT d FROM DoctorEntity d WHERE d.specialization = :specialization", DoctorEntity.class);
-            query.setParameter("specialization", specialization);
-            List<DoctorEntity> doctors = query.getResultList();
-
-            for (DoctorEntity doctor : doctors) {
-                ExistentDoctorDTO doctorDTO = EntityToDTO(doctor);
+            Bson filter = Filters.eq("doctor.specialization", specialization);
+            for (User user : collectionUser.find(filter)) {
+                Doctor doctor = user.getDoctor();
+                DoctorDTO doctorDTO = EntityToDTO(doctor);
                 doctorsDTO.add(doctorDTO);
             }
         } catch (Exception e) {
-            LOGGER.log(Level.INFO, "Error al buscar médicos por especialización: " + e.getMessage());
-        } finally {
-
+            LOGGER.log(Level.INFO, "Error, searching by specialization: " + e.getMessage());
         }
-
         return doctorsDTO;
     }
-     */
+
     public DoctorDTO EntityToDTO(Doctor doctorEntity) {
         DoctorDTO doctorDTO = new DoctorDTO();
         // doctorDTO.setId(doctorEntity.getId());

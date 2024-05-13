@@ -1,13 +1,11 @@
 package presentation;
 
-import JPAEntities.UserAdministrator;
-import JPAEntities.UserEntity;
 import administrator.system.IAdministratorDAO;
-import administrator.system.newAdministratorDTO;
+import administrator.system.AdministratorDTO;
+import entities.User;
 import factory.Factory;
 import user.system.IUserDAO;
 import user.system.NewUserDTO;
-
 
 public class JFrameAdministrator extends javax.swing.JFrame {
 
@@ -16,15 +14,15 @@ public class JFrameAdministrator extends javax.swing.JFrame {
     /**
      * Creates new form JFrameAdministrator
      */
-    public JFrameAdministrator(String user, String password) {
+    public JFrameAdministrator(String username, String password) {
         initComponents();
-        newAdministratorDTO newAdministratorDTO = new newAdministratorDTO();
+        AdministratorDTO newAdministratorDTO = new AdministratorDTO();
         IUserDAO userDAO = Factory.getUserDAO();
-        UserEntity userEntity = userDAO.findUserByUserPassword(user, password);
+        User user = userDAO.findUserByUsernameAndPassword(username, password);
         IAdministratorDAO administratorDAO = Factory.getAdministratorDAO();
-        UserAdministrator userAdministrator = administratorDAO.findAdministratorById(userEntity.getId());
-        newAdministratorDTO.setName(userAdministrator.getAdministrator().getNames());
-        this.userDTOAdmin = new NewUserDTO(user, password, newAdministratorDTO);
+        // UserAdministrator userAdministrator = administratorDAO.findAdministratorById(user.getId());
+        // newAdministratorDTO.setName(userAdministrator.getAdministrator().getNames());
+        this.userDTOAdmin = new NewUserDTO(username, password, newAdministratorDTO);
 
     }
 
