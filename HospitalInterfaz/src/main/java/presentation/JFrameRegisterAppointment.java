@@ -17,7 +17,7 @@ import patient.system.PatientDTO;
 import user.system.ExistentUserDTO;
 
 public class JFrameRegisterAppointment extends javax.swing.JFrame {
-    
+
     private Date appointementDate;
     private DoctorDTO doctorP1;
     private List<DoctorDTO> doctores;
@@ -33,9 +33,11 @@ public class JFrameRegisterAppointment extends javax.swing.JFrame {
         lblPatient.setVisible(false);
         txtCurp.setVisible(false);
         lblCurp.setVisible(false);
-        
+        cmbTime.setVisible(false);
+        lblTime.setVisible(false);
+
         this.existentUserDTO = existentUserDTO;
-        
+
     }
 
     //Constructor for Doctor
@@ -43,9 +45,11 @@ public class JFrameRegisterAppointment extends javax.swing.JFrame {
         initComponents();
         cmbPatient.setVisible(false);
         lblPatient.setVisible(false);
+        cmbTime.setVisible(false);
+        lblTime.setVisible(false);
         this.tipoUsuario = tipoUsuario;
         this.existentUserDTO = existentUserDTO;
-        
+
     }
 
     /**
@@ -286,12 +290,12 @@ cbxSpecialization.addActionListener(new java.awt.event.ActionListener() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        
+
         AppointmentDTO newAppointmentDTO = new AppointmentDTO();
         //   String txtDate = 
         // Define el formato de la fecha que estás recibiendo
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        
+
         try {
             // Parsea el String a un objeto Date
             appointementDate = dateFormat.parse(txtDate.getText());
@@ -300,43 +304,43 @@ cbxSpecialization.addActionListener(new java.awt.event.ActionListener() {
         }
         newAppointmentDTO.setAppointmentDate(appointementDate);
         newAppointmentDTO.setNote(txtNota.getText());
-        
+
         newAppointmentDTO.setDoctor(selectedDoctor);
         newAppointmentDTO.setStatus("ACTIVE");
-        
+
         if (!tipoUsuario.equals("DOCTOR")) {
             newAppointmentDTO.setPatient(existentUserDTO.getPatientDTO());
-            
+
             try {
                 IAppointmentManager appointmentManager = Factory.getAppointmentManager();
                 appointmentManager.createAppointment(newAppointmentDTO);
             } catch (Exception ex) {
                 Logger.getLogger(JFrameRegisterAppointment.class.getName()).log(Level.SEVERE, "Error creating appointment", ex);
             }
-            
+
             JFrameInitialPatient frameInitialPatient = new JFrameInitialPatient(existentUserDTO);
             frameInitialPatient.setVisible(true);
             this.dispose();
         } else {
-            
+
             IPatientDAO patientDAO = Factory.getPatientDAO();
             PatientDTO patientDTO = patientDAO.EntityToDto(patientDAO.searchPatientByCurp(txtCurp.getText()));
-            
+
             newAppointmentDTO.setPatient(patientDTO);
             newAppointmentDTO.setDoctor(existentUserDTO.getDoctorDTO());
-            
+
             try {
                 IAppointmentManager appointmentManager = Factory.getAppointmentManager();
                 appointmentManager.createAppointment(newAppointmentDTO);
             } catch (Exception ex) {
                 Logger.getLogger(JFrameRegisterAppointment.class.getName()).log(Level.SEVERE, "Error creating appointment", ex);
             }
-            
+
             JFrameInitialMedicos frameInitialMedicos = new JFrameInitialMedicos(existentUserDTO);
             frameInitialMedicos.setVisible(true);
             this.dispose();
         }
-        
+
 
     }//GEN-LAST:event_btnNextActionPerformed
 
@@ -367,7 +371,7 @@ cbxSpecialization.addActionListener(new java.awt.event.ActionListener() {
         if (selectedIndex != -1) {
             // Obtener el objeto DoctorDTO seleccionado
             selectedDoctor = doctores.get(selectedIndex);
-            
+
         }
     }//GEN-LAST:event_cmbDoctorActionPerformed
 
@@ -377,7 +381,7 @@ cbxSpecialization.addActionListener(new java.awt.event.ActionListener() {
      * @param evt
      */
     private void cbxSpecializationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxSpecializationActionPerformed
-        
+
         IDoctorDAO doctorDAO = Factory.getDoctorDAO();
         String selectedSpecialization = (String) cbxSpecialization.getSelectedItem();
         doctores = doctorDAO.searchBySpecialization(selectedSpecialization);
@@ -388,12 +392,12 @@ cbxSpecialization.addActionListener(new java.awt.event.ActionListener() {
             model.addElement(doctor);
         }
         this.cmbDoctor.setVisible(true);
-        
+
 
     }//GEN-LAST:event_cbxSpecializationActionPerformed
-    
+
     public int indexComboBox(int hour) {
-        
+
         return switch (hour) {
             case 10 ->
                 0;
@@ -426,7 +430,7 @@ cbxSpecialization.addActionListener(new java.awt.event.ActionListener() {
             default ->
                 4554;
         };
-        
+
     }
 
     private void cmbDoctorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbDoctorMouseClicked
