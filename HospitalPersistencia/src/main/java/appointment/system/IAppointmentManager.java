@@ -3,6 +3,7 @@ package appointment.system;
 import entities.Appointment;
 import java.util.Calendar;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 public interface IAppointmentManager {
 
@@ -14,6 +15,7 @@ public interface IAppointmentManager {
 
     public List<ExistentAppointmentDTO> getAppointmentsByCurp(String curp);
 
+    public boolean cancelAppointment(ObjectId appointmentId);
     /*
   
 
@@ -27,7 +29,7 @@ public interface IAppointmentManager {
 
     public List<ExistentAppointmentDTO> findAppointmentsByDoctorId(Long doctorId);
 
-    public boolean cancelAppointment(Long appointmentId);
+   
 
     public ExistentAppointmentDTO findAppointmentById(Long appointmentId);
 

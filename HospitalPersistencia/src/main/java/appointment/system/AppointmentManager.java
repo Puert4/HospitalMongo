@@ -129,6 +129,38 @@ public abstract class AppointmentManager implements IAppointmentManager {
         return appointments;
     }
 
+    @Override
+    public boolean cancelAppointment(ObjectId appointmentId) {
+        try {
+            // Crear un filtro para buscar la cita por su ID
+            Document query = new Document("_id", appointmentId);
+
+            // Buscar la cita en la colección de citas
+            Appointment appointment = collectionAppointment.find(query).first();
+
+            if (appointment != null) {
+                // Verificar si la cita ya ha sido cancelada
+                if (appointment.getAppointmentState() == "CANCELED") {
+
+                    LOGGER.log(Level.INFO, "Appoinment Alredy Canceled");
+                    return false;
+                } else {
+                    // Update Appointmentstate
+                    appointment.setAppointmentState("CANCELED");
+                    // Guardar la cita actualizada en MongoDB
+                    collectionAppointment.replaceOne(query, appointment);
+                    LOGGER.log(Level.INFO, "Appointment Canceled");
+                    return true;
+                }
+            } else {
+                LOGGER.log(Level.INFO, "No appoinment found with the ID given");
+                return false;
+            }
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "Error, cancel appointment", ex);
+            return false;
+        }
+    }
 
     /*
     @Override
@@ -216,35 +248,7 @@ public abstract class AppointmentManager implements IAppointmentManager {
 
 
 
-    @Override
-    public boolean cancelAppointment(Long appointmentId) {
-        try {
-            em.getTransaction().begin();
-            AppointmentEntity appointment = em.find(AppointmentEntity.class, appointmentId);
-            if (appointment != null) {
-                if(appointment.getAppointmentState() == AppointmentStateEntity.CANCELED){
-                    
-                    JOptionPane.showMessageDialog(null, "the appointment has already been canceled");
-                    em.getTransaction().commit();
-                    return false;
-                    
-                }else{
-                    
-                    appointment.setAppointmentState(AppointmentStateEntity.CANCELED);
-                    em.merge(appointment);
-                    em.getTransaction().commit();
-                    return true;
-                    
-                }
-                
-            } else {
-                return false;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            return false;
-        }
-    }
+  
 
     @Override
     public ExistentAppointmentDTO findAppointmentById(Long appointmentId) {
