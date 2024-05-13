@@ -132,14 +132,13 @@ public abstract class AppointmentManager implements IAppointmentManager {
     @Override
     public boolean cancelAppointment(ObjectId appointmentId) {
         try {
-            // Crear un filtro para buscar la cita por su ID
+
             Document query = new Document("_id", appointmentId);
 
-            // Buscar la cita en la colección de citas
             Appointment appointment = collectionAppointment.find(query).first();
 
             if (appointment != null) {
-                // Verificar si la cita ya ha sido cancelada
+                // Verify if the appointment has been canceled previous
                 if (appointment.getAppointmentState() == "CANCELED") {
 
                     LOGGER.log(Level.INFO, "Appoinment Alredy Canceled");

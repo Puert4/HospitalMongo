@@ -1,32 +1,21 @@
 package administrator.system;
 
+import com.mongodb.client.MongoCollection;
+import connection.ConnectionDB;
 import entities.Administrator;
+import entities.User;
+import java.util.logging.Logger;
+import user.system.UserDAO;
 
 public class AdministratorDAO implements IAdministratorDAO {
 
-    /*
-
-    private static final Logger LOGGER = Logger.getLogger(PatientDAO.class.getName());
-    private EntityManagerFactory emf;
-    private EntityManager em;
+    private static final Logger LOGGER = Logger.getLogger(AdministratorDAO.class.getName());
+    private final MongoCollection<User> collectionUser;
 
     public AdministratorDAO() {
-
-        IConnectionDB connection = new ConnectionDB();
-        emf = connection.createConnection();
-        em = emf.createEntityManager();
+        this.collectionUser = ConnectionDB.getDatabase().getCollection("user", User.class);
     }
 
-    @Override
-    public void registerAdministrator(newAdministratorDTO administratorDTO) {
-
-        AdministratorEntity administrator = DtoToEntity(administratorDTO);
-        em.getTransaction().begin();
-        em.persist(administrator);
-        em.getTransaction().commit();
-
-    }
-     */
     @Override
     public Administrator DtoToEntity(AdministratorDTO administratorDTO) {
         Administrator adminisrator = new Administrator();
@@ -34,16 +23,15 @@ public class AdministratorDAO implements IAdministratorDAO {
         return adminisrator;
     }
 
-    /*
-
     @Override
-    public ExistentAdministratorDTO EntityToDto(AdministratorEntity administrator) {
-        ExistentAdministratorDTO administratorDTO = new ExistentAdministratorDTO();
-        administratorDTO.setId(administrator.getId());
+    public AdministratorDTO EntityToDTO(Administrator administrator) {
+        AdministratorDTO administratorDTO = new AdministratorDTO();
         administratorDTO.setName(administrator.getNames());
+
         return administratorDTO;
     }
 
+    /*
     @Override
     public UserAdministrator findAdministratorById(Long id) {
 

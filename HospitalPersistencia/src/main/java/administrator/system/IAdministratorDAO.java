@@ -10,9 +10,11 @@ public interface IAdministratorDAO {
     
      */
     public Administrator DtoToEntity(AdministratorDTO administratorDTO);
+
+    public AdministratorDTO EntityToDTO(Administrator administrator);
     /*
 
-    public ExistentAdministratorDTO EntityToDto(AdministratorEntity administrator);
+    
 
     public AdministratorEntity searchAdministratorByName(String names);
 

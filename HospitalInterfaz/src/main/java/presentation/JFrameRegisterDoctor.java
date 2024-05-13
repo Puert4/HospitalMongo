@@ -220,11 +220,11 @@ comboBox.addActionListener(new java.awt.event.ActionListener() {
         String secondName = txtSeconName.getText();
         String medicalCart = txtMedicalCart.getText();
         String specialization = (String) comboBox.getSelectedItem();
-        String user = txtUser.getText();
+        String username = txtUser.getText();
         String password = txtPassword.getText();
 
         if (names.isEmpty() || firstName.isEmpty() || secondName.isEmpty()
-                || medicalCart.isEmpty() || user.isEmpty() || password.isEmpty()) {
+                || medicalCart.isEmpty() || username.isEmpty() || password.isEmpty()) {
 
             JOptionPane.showMessageDialog(null, "Favor de llenar todos los campos", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
@@ -239,25 +239,24 @@ comboBox.addActionListener(new java.awt.event.ActionListener() {
                     specialization,
                     medicalCart);
 
-            //       doctorDTO.setSpecialization(specialization);
+            doctorDTO.setSpecialization(specialization);
             IDoctorDAO doctorDAO = Factory.getDoctorDAO();
 
             IUserDAO userSystem = Factory.getUserDAO();
 
-            ExistentUserDTO existentUserDTO = new ExistentUserDTO();
-            existentUserDTO = userSystem.EntitytoDTO(userSystem.findUserByUsernameAndPassword(user, password));
-
-            if (existentUserDTO != null) {
+//            ExistentUserDTO existentUserDTO = new ExistentUserDTO();
+//            existentUserDTO = userSystem.EntitytoDTO(userSystem.findUserByUsernameAndPassword(username, password));
+            if (!userSystem.userExist(username)) {
 
                 JOptionPane.showMessageDialog(this, "The username is already in use");
 
             } else {
 
                 if (doctorDAO.searchByMedicart(doctorDTO.getMedicalCart()) == null) {
-                  //  doctorDAO.registerDoctor(doctorDTO);
-                    NewUserDTO userDTO = new NewUserDTO(user, password, doctorDTO);
-                 //   userDAO.registerDoctorUser(doctorDTO, userDTO);
-                 userSystem.registerUser(userDTO);
+
+                    NewUserDTO userDTO = new NewUserDTO(username, password, doctorDTO);
+                    //   userDAO.registerDoctorUser(doctorDTO, userDTO);
+                    userSystem.registerUser(userDTO);
                     JFrameAdministrator frameAdministrator = new JFrameAdministrator(userDTOAdmin.getUser(), userDTOAdmin.getPassword());
                     frameAdministrator.setVisible(true);
                     this.dispose();

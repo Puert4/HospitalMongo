@@ -8,7 +8,6 @@ import entities.User;
 import connection.ConnectionDB;
 import doctor.system.IDoctorDAO;
 import factory.Factory;
-import static factory.Factory.administratorDAO;
 import java.util.logging.Level;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
@@ -95,9 +94,10 @@ public class UserDAO implements IUserDAO {
         } else if ("DOCTOR".equals(user.getUserType())) {
             IDoctorDAO doctorDAO = Factory.getDoctorDAO();
             ExistentUserDTO.setDoctorDTO(doctorDAO.EntityToDTO(user.getDoctor()));
-        } //else if ("ADMIN".equals(user.getUserType())) {
-//            newUserDTO.setAdministratorDTO(administratorDAO.DtoToEntity(user.getAdministrator()));
-//        }
+        } else if ("ADMIN".equals(user.getUserType())) {
+            IAdministratorDAO administratorDAO = Factory.getAdministratorDAO();
+            ExistentUserDTO.setAdministratorDTO(administratorDAO.EntityToDTO(user.getAdministrator()));
+        }
 
         return ExistentUserDTO;
     }

@@ -13,7 +13,6 @@ entities\Doctor.class
 loginManager\LogIn.class
 entities\User.class
 administrator\system\AdministratorDAO$1.class
-administrator\system\ExistentAdministratorDTO.class
 entities\Administrator.class
 connection\IConnectionDB.class
 appointment\system\AppointmentManager$1.class

@@ -1,5 +1,6 @@
 package itson.org.design.hospitalpersistencia;
 
+import administrator.system.AdministratorDTO;
 import appointment.system.IAppointmentManager;
 import doctor.system.DoctorDTO;
 import factory.Factory;
@@ -9,6 +10,7 @@ import user.system.IUserDAO;
 import user.system.NewUserDTO;
 import appointment.system.AppointmentDTO;
 import doctor.system.IDoctorDAO;
+import entities.Administrator;
 import entities.Doctor;
 import entities.Patient;
 import entities.User;
@@ -81,5 +83,12 @@ public class HospitalPersistencia {
 //        ExistentUserDTO existentUserDTO = new ExistentUserDTO();
 //        existentUserDTO = userSystem.EntitytoDTO(userSystem.findUserByUsernameAndPassword("Carlos", "Carlos"));
 //        System.out.println(existentUserDTO.getPatientDTO().getNames());
+
+    IUserDAO userDAO = Factory.getUserDAO();
+    
+    AdministratorDTO admin = new AdministratorDTO("Yomero");
+    NewUserDTO userDTO = new NewUserDTO("Jullian","Jullian",admin);
+    userDAO.registerUser(userDTO);
+    
     }
 }
