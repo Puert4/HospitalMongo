@@ -23,6 +23,7 @@ public class HospitalPersistencia {
 
     public static void main(String[] args) {
 
+        /*
         
         String names = "Juan";
         String firstName = "González";
@@ -41,8 +42,7 @@ public class HospitalPersistencia {
         IUserDAO userDAO = Factory.getUserDAO();
         NewUserDTO userDTO = new NewUserDTO("Carlos", "Carlos", patientDTO);
         userDAO.registerUser(userDTO);
-
-         
+         */
  /*
         DoctorDTO doctorDTO = new DoctorDTO(
                 "Juan",
@@ -56,8 +56,8 @@ public class HospitalPersistencia {
         NewUserDTO userDTO = new NewUserDTO("Juan", "Juan", doctorDTO);
         userDAO.registerUser(userDTO);
          */
- /*
         //Se crea un appointmetn
+        /*
         IPatientDAO patientDAO = Factory.getPatientDAO();
         PatientDTO patientDTO = patientDAO.EntityToDto(patientDAO.searchPatientByCurp("GOLJ910101HDFNRR02"));
         System.out.println(patientDTO + " " + patientDTO.getNames());
@@ -77,9 +77,9 @@ public class HospitalPersistencia {
         User user = userDAO.findUserByUsernameAndPassword("Carlos", "Carlos");
         System.out.println(user.getUserType() +" "+ user.getPatient().getNames());
          */
-        IUserDAO userSystem = Factory.getUserDAO();
-        ExistentUserDTO existentUserDTO = new ExistentUserDTO();
-        existentUserDTO = userSystem.EntitytoDTO(userSystem.findUserByUsernameAndPassword("Carlos", "Carlos"));
-        System.out.println(existentUserDTO.getPatientDTO().getNames());
+//        IUserDAO userSystem = Factory.getUserDAO();
+//        ExistentUserDTO existentUserDTO = new ExistentUserDTO();
+//        existentUserDTO = userSystem.EntitytoDTO(userSystem.findUserByUsernameAndPassword("Carlos", "Carlos"));
+//        System.out.println(existentUserDTO.getPatientDTO().getNames());
     }
 }

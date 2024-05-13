@@ -24,8 +24,7 @@ public class JFrameConfirmAppointment extends javax.swing.JFrame {
         initComponents();
         this.lblName.setText(newAppointmentDTO.getPatient().getNames());
         this.lblDoctor.setText(newAppointmentDTO.getDoctor().getName());
-        //  String dateString = "" + newAppointmentDTO.getAppointmentDate().get(Calendar.DATE) + "/" + (newAppointmentDTO.getAppointmentDate().get(Calendar.MONTH) + 1) + "/" + newAppointmentDTO.getAppointmentDate().get(Calendar.YEAR) + "  " + newAppointmentDTO.getAppointmentDate().get(Calendar.HOUR_OF_DAY) + ":00";
-        // this.lblDate.setText(dateString);
+    
         this.lblSpecialitazion.setText(newAppointmentDTO.getDoctor().getSpecialization().toString());
         this.lblNote.setText(newAppointmentDTO.getNote());
     }

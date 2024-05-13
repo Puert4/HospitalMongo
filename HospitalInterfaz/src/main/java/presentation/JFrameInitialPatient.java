@@ -146,7 +146,7 @@ public class JFrameInitialPatient extends javax.swing.JFrame {
 
     private void btnCreateAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAppointmentActionPerformed
         // TODO add your handling code here:
-        JFrameRegisterAppointment register = new JFrameRegisterAppointment(existentUserDTO.getPatientDTO());
+        JFrameRegisterAppointment register = new JFrameRegisterAppointment(existentUserDTO);
         register.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnCreateAppointmentActionPerformed
