@@ -108,12 +108,35 @@ public abstract class AppointmentManager implements IAppointmentManager {
 
     }
 
+    @Override
     public List<ExistentAppointmentDTO> getAppointmentsByCurp(String curp) {
         List<ExistentAppointmentDTO> appointments = new ArrayList<>();
 
         try {
             // Crear un filtro para buscar por el CURP del paciente
             Document query = new Document("patient.curp", curp);
+
+            // Obtener las citas que coinciden con el filtro
+            List<Appointment> matchingAppointments = collectionAppointment.find(query).into(new ArrayList<>());
+
+            // Convertir las citas a DTO y agregarlas a la lista de retorno
+            for (Appointment appointment : matchingAppointments) {
+                appointments.add(convertToDTO(appointment));
+            }
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "Error, searching for appoinments by curp", ex);
+        }
+
+        return appointments;
+    }
+
+    @Override
+    public List<ExistentAppointmentDTO> getAppointmentsByMedicalCart(String medicalCart) {
+        List<ExistentAppointmentDTO> appointments = new ArrayList<>();
+
+        try {
+            // Crear un filtro para buscar por el CURP del paciente
+            Document query = new Document("doctor.medicalCart", medicalCart);
 
             // Obtener las citas que coinciden con el filtro
             List<Appointment> matchingAppointments = collectionAppointment.find(query).into(new ArrayList<>());

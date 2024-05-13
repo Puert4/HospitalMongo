@@ -2,10 +2,16 @@ package presentation;
 
 //import appointment.system.ExistentAppointmentDTO;
 //import appointment.system.IAppointmentManager;
+import appointment.system.AppointmentDTO;
+import appointment.system.ExistentAppointmentDTO;
+import appointment.system.IAppointmentManager;
 import doctor.system.DoctorDTO;
 import doctor.system.IDoctorDAO;
 import factory.Factory;
 import java.util.ArrayList;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import org.bson.types.ObjectId;
 import user.system.ExistentUserDTO;
 //import java.util.Calendar;
 //import java.util.List;
@@ -14,15 +20,16 @@ import user.system.ExistentUserDTO;
 
 public class JFrameInitialMedicos extends javax.swing.JFrame {
 
-    private Long idDoctor;
-    private DoctorDTO existentDoctor;
-    private ArrayList<Long> listaDeLongs = new ArrayList<>();
+    // private Long idDoctor;
+    // private DoctorDTO existentDoctor;
+    private ArrayList<ObjectId> listaDeLongs = new ArrayList<>();
+    private final ExistentUserDTO existenetUserDTO;
 
     /**
      * Creates new form InicioPaciente
      */
-    public JFrameInitialMedicos(ExistentUserDTO existenetUserDTo) {
-        this.idDoctor = idDoctor;
+    public JFrameInitialMedicos(ExistentUserDTO existenetUserDTO) {
+        this.existenetUserDTO = existenetUserDTO;
         initComponents();
 
         IDoctorDAO doctorDAO = Factory.getDoctorDAO();
@@ -37,27 +44,26 @@ public class JFrameInitialMedicos extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
 
-    /*
     private void cargarCitasPaciente() {
         DefaultTableModel tblModel = (DefaultTableModel) jTableAppointment.getModel();
         tblModel.setRowCount(0); // Limpiar la tabla antes de cargar los nuevos datos
 
         IAppointmentManager appointmentManager = Factory.getAppointmentManager();
 
-        List<ExistentAppointmentDTO> appointments = appointmentManager.findAppointmentsByDoctorId(idDoctor);
+        List<ExistentAppointmentDTO> appointments = appointmentManager.getAppointmentsByMedicalCart(existenetUserDTO.getDoctorDTO().getMedicalCart());
 
         for (ExistentAppointmentDTO appointment : appointments) {
-            String dateFormat = appointment.getAppointmentDate().get(Calendar.DAY_OF_MONTH) + "/" + (appointment.getAppointmentDate().get(Calendar.MONTH) + 1) + "/" + appointment.getAppointmentDate().get(Calendar.YEAR) + " " + appointment.getAppointmentDate().get(Calendar.HOUR_OF_DAY) + ":00";
+            //   String dateFormat = appointment.getAppointmentDate().get(Calendar.DAY_OF_MONTH) + "/" + (appointment.getAppointmentDate().get(Calendar.MONTH) + 1) + "/" + appointment.getAppointmentDate().get(Calendar.YEAR) + " " + appointment.getAppointmentDate().get(Calendar.HOUR_OF_DAY) + ":00";
             tblModel.addRow(new Object[]{
-                dateFormat,
-                appointment.getPatient().getName(),
+                appointment.getAppointmentDate().getTime(),
+                appointment.getPatient().getNames(),
                 appointment.getNote(),
                 appointment.getStatus()
             });
             listaDeLongs.add(appointment.getId());
         }
     }
-     */
+
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 

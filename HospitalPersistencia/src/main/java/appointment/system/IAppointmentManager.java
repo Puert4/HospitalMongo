@@ -16,6 +16,8 @@ public interface IAppointmentManager {
     public List<ExistentAppointmentDTO> getAppointmentsByCurp(String curp);
 
     public boolean cancelAppointment(ObjectId appointmentId);
+
+    public List<ExistentAppointmentDTO> getAppointmentsByMedicalCart(String medicalCart);
     /*
   
 
