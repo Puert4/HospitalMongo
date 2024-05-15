@@ -253,6 +253,7 @@ public class JFrameLogin extends javax.swing.JFrame {
                         this.dispose();
                         break;
                     case "PATIENT":
+
                         // Long idPatient = loginSystem.validateUser(user, password);
                         JFrameInitialPatient frameInitialPatient = new JFrameInitialPatient(existentUserDTO);
                         frameInitialPatient.setVisible(true);

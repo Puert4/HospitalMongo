@@ -246,7 +246,7 @@ comboBox.addActionListener(new java.awt.event.ActionListener() {
 
 //            ExistentUserDTO existentUserDTO = new ExistentUserDTO();
 //            existentUserDTO = userSystem.EntitytoDTO(userSystem.findUserByUsernameAndPassword(username, password));
-            if (!userSystem.userAndPasswordExist(username, password)) {
+            if (userSystem.userAndPasswordExist(username, password)) {
 
                 JOptionPane.showMessageDialog(this, "The username is already in use");
 

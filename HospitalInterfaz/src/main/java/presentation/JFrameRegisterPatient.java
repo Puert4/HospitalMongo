@@ -98,6 +98,7 @@ public class JFrameRegisterPatient extends javax.swing.JFrame {
         Usuario12 = new javax.swing.JLabel();
         Usuario13 = new javax.swing.JLabel();
         lblDate = new javax.swing.JLabel();
+        btnCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -253,6 +254,13 @@ public class JFrameRegisterPatient extends javax.swing.JFrame {
         Usuario13.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         Usuario13.setText("Second Last Name");
 
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout FondoPanelLayout = new javax.swing.GroupLayout(FondoPanel);
         FondoPanel.setLayout(FondoPanelLayout);
         FondoPanelLayout.setHorizontalGroup(
@@ -287,9 +295,6 @@ public class JFrameRegisterPatient extends javax.swing.JFrame {
                         .addGap(130, 130, 130)
                         .addComponent(txtCurp, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(FondoPanelLayout.createSequentialGroup()
-                        .addGap(197, 197, 197)
-                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(FondoPanelLayout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(60, 60, 60)
@@ -315,7 +320,12 @@ public class JFrameRegisterPatient extends javax.swing.JFrame {
                                 .addComponent(txtStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(FondoPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(Iniciar_Sesion, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(Iniciar_Sesion, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(FondoPanelLayout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(btnCancel)
+                        .addGap(81, 81, 81)
+                        .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(47, Short.MAX_VALUE))
         );
         FondoPanelLayout.setVerticalGroup(
@@ -369,8 +379,11 @@ public class JFrameRegisterPatient extends javax.swing.JFrame {
                     .addGroup(FondoPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtPhone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(61, 61, 61)
-                .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                .addGroup(FondoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAceptar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancel))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -509,43 +522,57 @@ public class JFrameRegisterPatient extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtStreetActionPerformed
 
-//    /**
-//     * @param args the command line arguments
-//     */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//     txtFirstNamer-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(JFRegisterPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(JFRegisterPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(JFRegisterPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(JFRegisterPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        if (userDTOAdmin == null) {
+            JFrameLogin login = new JFrameLogin();
+            login.setVisible(true);
+            this.dispose();
+        }
+        //else {
+//            JFrameAdministrator frameAdministrator = new JFrameAdministrator(userDTOAdmin.getUser(), userDTOAdmin.getPassword());
+//            frameAdministrator.setVisible(true);
+//            this.dispose();
 //        }
-//        //</editor-fold>
-//        //</editor-fold>
-//        //</editor-fold>
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new JFRegisterPatient().setVisible(true);
-//            }
-//        });
-//    }
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+//    /**
+    //     * @param args the command line arguments
+    //     */
+    //    public static void main(String args[]) {
+    //        /* Set the Nimbus look and feel */
+    //     txtFirstNamer-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+    //        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+    //         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+    //         */
+    //        try {
+    //            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+    //                if ("Nimbus".equals(info.getName())) {
+    //                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+    //                    break;
+    //                }
+    //            }
+    //        } catch (ClassNotFoundException ex) {
+    //            java.util.logging.Logger.getLogger(JFRegisterPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //        } catch (InstantiationException ex) {
+    //            java.util.logging.Logger.getLogger(JFRegisterPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //        } catch (IllegalAccessException ex) {
+    //            java.util.logging.Logger.getLogger(JFRegisterPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+    //            java.util.logging.Logger.getLogger(JFRegisterPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //        }
+    //        //</editor-fold>
+    //        //</editor-fold>
+    //        //</editor-fold>
+    //        //</editor-fold>
+    //
+    //        /* Create and display the form */
+    //        java.awt.EventQueue.invokeLater(new Runnable() {
+    //            public void run() {
+    //                new JFRegisterPatient().setVisible(true);
+    //            }
+    //        });
+    //    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel FondoAzul;
     private javax.swing.JPanel FondoGenero;
@@ -565,6 +592,7 @@ public class JFrameRegisterPatient extends javax.swing.JFrame {
     private javax.swing.JLabel Usuario8;
     private javax.swing.JLabel Usuario9;
     private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnCancel;
     private javax.swing.JCheckBox cbxFamele;
     private javax.swing.JCheckBox cbxMale;
     private javax.swing.JCheckBox cbxOther;

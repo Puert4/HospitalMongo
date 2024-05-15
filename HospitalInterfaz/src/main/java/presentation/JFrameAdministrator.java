@@ -8,7 +8,7 @@ import user.system.IUserDAO;
 import user.system.NewUserDTO;
 
 public class JFrameAdministrator extends javax.swing.JFrame {
-
+    
     private NewUserDTO userDTOAdmin;
 
     /**
@@ -22,8 +22,10 @@ public class JFrameAdministrator extends javax.swing.JFrame {
         IAdministratorDAO administratorDAO = Factory.getAdministratorDAO();
         // UserAdministrator userAdministrator = administratorDAO.findAdministratorById(user.getId());
         // newAdministratorDTO.setName(userAdministrator.getAdministrator().getNames());
+        
+        this.jToggleButton1.setVisible(false);
         this.userDTOAdmin = new NewUserDTO(username, password, newAdministratorDTO);
-
+        
     }
 
     /**
@@ -128,16 +130,16 @@ public class JFrameAdministrator extends javax.swing.JFrame {
         frameRegisterDoctor.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
         // TODO add your handling code here:
 
         JFrameCreateUser createUser = new JFrameCreateUser(userDTOAdmin);
         createUser.setVisible(true);
         this.dispose();
-
+        
     }//GEN-LAST:event_jToggleButton1ActionPerformed
-
+    
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         JFrameLogin frameLogin = new JFrameLogin();
         frameLogin.setVisible(true);
