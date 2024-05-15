@@ -102,6 +102,22 @@ public class UserDAO implements IUserDAO {
         return ExistentUserDTO;
     }
 
+    public boolean userAndPasswordExist(String username, String password) {
+        try {
+
+            Bson filter = Filters.eq("user", username);
+
+            filter = Filters.and(filter, Filters.eq("password", password));
+
+            long count = userCollection.countDocuments(filter);
+
+            return count > 0;
+        } catch (Exception ex) {
+            LOGGER.log(Level.SEVERE, "Error checking if user exists", ex);
+            return false;
+        }
+    }
+
     public boolean userExist(String username) {
         try {
 

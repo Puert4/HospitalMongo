@@ -13,7 +13,9 @@ public interface IUserDAO {
 
     public ExistentUserDTO EntitytoDTO(User user);
 
-    public boolean userExist(String user);
+    public boolean userAndPasswordExist(String user, String password);
+
+    public boolean userExist(String username);
 
     // public Long validateUser(String user, String password);
     //public void registerAdminUser(newAdministratorDTO administratorDTO, NewUserDTO userDTO);

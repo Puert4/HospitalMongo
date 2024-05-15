@@ -19,7 +19,7 @@ import user.system.ExistentUserDTO;
 //import javax.swing.JOptionPane;
 //import javax.swing.table.DefaultTableModel;
 
-public class JFrameInitialMedicos extends javax.swing.JFrame {
+public class JFrameInitialDoctors extends javax.swing.JFrame {
 
     // private Long idDoctor;
     // private DoctorDTO existentDoctor;
@@ -29,7 +29,7 @@ public class JFrameInitialMedicos extends javax.swing.JFrame {
     /**
      * Creates new form InicioPaciente
      */
-    public JFrameInitialMedicos(ExistentUserDTO existenetUserDTO) {
+    public JFrameInitialDoctors(ExistentUserDTO existenetUserDTO) {
         this.existenetUserDTO = existenetUserDTO;
         initComponents();
 
@@ -163,9 +163,7 @@ public class JFrameInitialMedicos extends javax.swing.JFrame {
         frameRegisterAppointment.setVisible(true);
         this.dispose();
 
-
     }//GEN-LAST:event_jButton2ActionPerformed
-
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:

@@ -393,62 +393,87 @@ public class JFrameRegisterPatient extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         // TODO add your handling code here:
+        String names = null;
+        String firstName = null;
+        String secondName = null;
+        String colony = null;
+        String zipCodeS = null;
+        String curp = null;
+        String phone = null;
+        String socialNumber = null;
+        String street = null;
+        Date birthDate = null;
+        String sex = null;
+        int zipCode = 0;
 
-        String names = txtName.getText();
-        String firstName = txtFirstName.getText();
-        String secondName = txtSecondName.getText();
-        String colony = txtColony.getText();
-        String zipCodeS = txtZipCode.getText();
-        String curp = txtCurp.getText();
-        String phone = txtPhone.getText();
-        String socialNumber = txtSecurityNumber.getText();
-        String street = txtStreet.getText();
-        Date birthDate = dateChooser.getCalendar().getTime();
-        String sex = "";
-        if (cbxMale.isSelected()) {
-            sex = "M";
-        } else if (cbxFamele.isSelected()) {
-            sex = "F";
-        } else if (cbxOther.isSelected()) {
-            sex = txtOther.getText();
-        } else {
+        try {
+            names = txtName.getText();
+            firstName = txtFirstName.getText();
+            secondName = txtSecondName.getText();
+            colony = txtColony.getText();
+            zipCodeS = txtZipCode.getText();
+            curp = txtCurp.getText();
+            phone = txtPhone.getText();
+            socialNumber = txtSecurityNumber.getText();
+            street = txtStreet.getText();
+            birthDate = dateChooser.getCalendar().getTime();
             sex = "";
+            if (cbxMale.isSelected()) {
+                sex = "M";
+            } else if (cbxFamele.isSelected()) {
+                sex = "F";
+            } else if (cbxOther.isSelected()) {
+                sex = txtOther.getText();
+            } else {
+                sex = "";
+            }
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null, "Fill all the information", "Error", JOptionPane.INFORMATION_MESSAGE);
         }
 
         if (names.isEmpty() || firstName.isEmpty() || secondName.isEmpty() || colony.isEmpty()
                 || zipCodeS.isEmpty() || curp.isEmpty() || phone.isEmpty() || socialNumber.isEmpty()
                 || street.isEmpty() || sex.isEmpty() || birthDate == null) {
-            JOptionPane.showMessageDialog(null, "Favor de llenar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
-        }
-        if (!names.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+") || !firstName.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ]+") || !secondName.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ]+")) {
-            JOptionPane.showMessageDialog(null, "Names can only contain leters", "Error", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Fill all the information", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-
-            try {
-
-                int zipCode = Integer.parseInt(zipCodeS);
-                PatientDTO newPatientDTO = new PatientDTO(
-                        names, firstName, secondName, curp, phone, birthDate, sex, street, zipCode, socialNumber, colony);
-                userDTO.setPatientDTO(newPatientDTO);
-                System.out.println(userDTO.getPatientDTO().getNames());
-
-                IUserDAO userSystem = Factory.getUserDAO();
-
-                NewUserDTO newUserDTO = new NewUserDTO(userDTO.getUser(), userDTO.getPassword(), newPatientDTO);
-                userSystem.registerUser(newUserDTO);
-
-            } catch (Exception ex) {
-                Logger.getLogger(JFrameRegisterPatient.class.getName()).log(Level.SEVERE, "Error al persistir", ex);
-            }
-
-            if (userDTOAdmin == null) {
-                JFrameLogin frameLogin = new JFrameLogin();
-                frameLogin.setVisible(true);
-                this.dispose();
+            if (!names.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ\\s]+") || !firstName.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ]+") || !secondName.matches("[a-zA-ZñÑáéíóúÁÉÍÓÚ]+")) {
+                JOptionPane.showMessageDialog(null, "Names can only contain leters", "Error", JOptionPane.INFORMATION_MESSAGE);
             } else {
-                JFrameAdministrator admin = new JFrameAdministrator(userDTOAdmin.getUser(), userDTOAdmin.getPassword());
-                admin.setVisible(true);
-                this.dispose();
+
+                if (!zipCodeS.matches("\\d+")) {
+
+                    JOptionPane.showMessageDialog(null, "Zip code can only contain numbers", "Error", JOptionPane.INFORMATION_MESSAGE);
+
+                } else {
+                    zipCode = Integer.parseInt(zipCodeS);
+
+                    try {
+
+                        PatientDTO newPatientDTO = new PatientDTO(
+                                names, firstName, secondName, curp, phone, birthDate, sex, street, zipCode, socialNumber, colony);
+                        userDTO.setPatientDTO(newPatientDTO);
+                        System.out.println(userDTO.getPatientDTO().getNames());
+
+                        IUserDAO userSystem = Factory.getUserDAO();
+
+                        NewUserDTO newUserDTO = new NewUserDTO(userDTO.getUser(), userDTO.getPassword(), newPatientDTO);
+                        userSystem.registerUser(newUserDTO);
+
+                    } catch (Exception ex) {
+                        Logger.getLogger(JFrameRegisterPatient.class.getName()).log(Level.SEVERE, "Error al persistir", ex);
+                    }
+
+                    if (userDTOAdmin == null) {
+                        JFrameLogin frameLogin = new JFrameLogin();
+                        frameLogin.setVisible(true);
+                        this.dispose();
+                    } else {
+                        JFrameAdministrator admin = new JFrameAdministrator(userDTOAdmin.getUser(), userDTOAdmin.getPassword());
+                        admin.setVisible(true);
+                        this.dispose();
+                    }
+                }
             }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed

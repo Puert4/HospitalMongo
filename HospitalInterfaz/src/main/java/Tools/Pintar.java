@@ -13,8 +13,9 @@ import javax.swing.JLabel;
  * @author Arell
  */
 public class Pintar {
-private ImageIcon imagen;
-private Icon foto;
+
+    private ImageIcon imagen;
+    private Icon foto;
 
     public ImageIcon getImagen() {
         return imagen;
@@ -35,8 +36,9 @@ private Icon foto;
     public Pintar() {
     }
 
-    public void PintarImagen(JLabel label,String ruta){
-    this.imagen = new ImageIcon(ruta);
-    this.foto = new ImageIcon(this.imagen.getImage().getScaledInstance(label.getWidth(), label.getHeight(), java.awt.Image.SCALE_SMOOTH));
-    label.setIcon(this.foto);}
+    public void PintarImagen(JLabel label, String ruta) {
+        this.imagen = new ImageIcon(ruta);
+        this.foto = new ImageIcon(this.imagen.getImage().getScaledInstance(label.getWidth(), label.getHeight(), java.awt.Image.SCALE_SMOOTH));
+        label.setIcon(this.foto);
+    }
 }

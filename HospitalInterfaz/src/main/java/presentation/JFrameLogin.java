@@ -139,8 +139,8 @@ public class JFrameLogin extends javax.swing.JFrame {
                     .addGroup(FondoInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtUser)
                         .addComponent(Iniciar_Sesion, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
-                    .addComponent(Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         FondoInicioLayout.setVerticalGroup(
@@ -233,45 +233,49 @@ public class JFrameLogin extends javax.swing.JFrame {
         String user = txtUser.getText();
         String password = txtPassword.getText();
 
-        IUserDAO userSystem = Factory.getUserDAO();
-        ILogIn loginSystem = Factory.getLogIn();
-
-        ExistentUserDTO existentUserDTO = new ExistentUserDTO();
-
-        if (userSystem.userExist(user)) {
-            existentUserDTO = userSystem.EntitytoDTO(userSystem.findUserByUsernameAndPassword(user, password));
-
-            switch (existentUserDTO.getUserType()) {
-                case "ADMIN":
-
-                    JFrameAdministrator frameAdministrator = new JFrameAdministrator(user, password);
-                    frameAdministrator.setVisible(true);
-                    this.dispose();
-                    break;
-                case "PATIENT":
-                    Long idPatient = loginSystem.validateUser(user, password);
-                    JFrameInitialPatient frameInitialPatient = new JFrameInitialPatient(existentUserDTO);
-                    frameInitialPatient.setVisible(true);
-                    this.dispose();
-                    break;
-
-                case "DOCTOR":
-
-                    Long idDoctor = loginSystem.validateUser(user, password);
-                    JFrameInitialMedicos frameInitialMedicos = new JFrameInitialMedicos(existentUserDTO);
-                    frameInitialMedicos.setVisible(true);
-                    this.dispose();
-                    break;
-
-                default:
-
-                    break;
-            }
+        if (user.isBlank() || password.isBlank()) {
+            JOptionPane.showMessageDialog(this, "User or Password can't be blank", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
 
-            JOptionPane.showMessageDialog(this, "User or Password doesn't exist", "Error", JOptionPane.ERROR_MESSAGE);
-        }
+            IUserDAO userSystem = Factory.getUserDAO();
+            ILogIn loginSystem = Factory.getLogIn();
 
+            ExistentUserDTO existentUserDTO = new ExistentUserDTO();
+
+            if (userSystem.userAndPasswordExist(user, password)) {
+                existentUserDTO = userSystem.EntitytoDTO(userSystem.findUserByUsernameAndPassword(user, password));
+
+                switch (existentUserDTO.getUserType()) {
+                    case "ADMIN":
+
+                        JFrameAdministrator frameAdministrator = new JFrameAdministrator(user, password);
+                        frameAdministrator.setVisible(true);
+                        this.dispose();
+                        break;
+                    case "PATIENT":
+                        // Long idPatient = loginSystem.validateUser(user, password);
+                        JFrameInitialPatient frameInitialPatient = new JFrameInitialPatient(existentUserDTO);
+                        frameInitialPatient.setVisible(true);
+                        this.dispose();
+                        break;
+
+                    case "DOCTOR":
+
+                        //   Long idDoctor = loginSystem.validateUser(user, password);
+                        JFrameInitialDoctors frameInitialMedicos = new JFrameInitialDoctors(existentUserDTO);
+                        frameInitialMedicos.setVisible(true);
+                        this.dispose();
+                        break;
+
+                    default:
+
+                        break;
+                }
+            } else {
+
+                JOptionPane.showMessageDialog(this, "User or Password doesn't exist", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
