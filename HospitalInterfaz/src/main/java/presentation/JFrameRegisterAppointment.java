@@ -49,8 +49,6 @@ public class JFrameRegisterAppointment extends javax.swing.JFrame {
         initComponents();
         cmbPatient.setVisible(true);
         lblPatient.setVisible(true);
-        cmbTime.setVisible(false);
-        lblTime.setVisible(false);
         txtCurp.setEditable(false);
         this.typeUser = typeUser;
         this.existentUserDTO = existentUserDTO;
@@ -380,8 +378,8 @@ cbxSpecialization.addActionListener(new java.awt.event.ActionListener() {
     }//GEN-LAST:event_btnNextActionPerformed
 
     /**
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         // TODO add your handling code here:
@@ -434,9 +432,9 @@ cbxSpecialization.addActionListener(new java.awt.event.ActionListener() {
     }//GEN-LAST:event_cbxSpecializationActionPerformed
 
     /**
-     * 
+     *
      * @param hour
-     * @return 
+     * @return
      */
     public int indexComboBox(int hour) {
 
@@ -504,8 +502,8 @@ cbxSpecialization.addActionListener(new java.awt.event.ActionListener() {
     }//GEN-LAST:event_cmbPatientActionPerformed
 
     /**
-     * 
-     * @param evt 
+     *
+     * @param evt
      */
     private void cmbPatientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cmbPatientMouseClicked
         // TODO add your handling code here:

@@ -14,10 +14,17 @@ public class ConnectionDB {
     private static final String direccion = "mongodb://localhost:27017";
     private static final String nombreBD = "HospitalMongo";
 
+    /**
+     * 
+     */
     private ConnectionDB() {
 
     }
 
+    /**
+     * 
+     * @return 
+     */
     public static MongoDatabase getDatabase() {
 
         //Configuracion del codec para manejar POJOs
@@ -45,6 +52,9 @@ public class ConnectionDB {
 
     }
 
+    /**
+     * 
+     */
     public static void close() {
         if (mongoClient != null) {
             mongoClient.close();

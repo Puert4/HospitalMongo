@@ -17,10 +17,18 @@ public class DoctorDAO implements IDoctorDAO {
     private static final Logger LOGGER = Logger.getLogger(DoctorDAO.class.getName());
     private final MongoCollection<User> collectionUser;
 
+    /**
+     *
+     */
     public DoctorDAO() {
         this.collectionUser = ConnectionDB.getDatabase().getCollection("user", User.class);
     }
 
+    /**
+     *
+     * @param doctorDTO
+     * @return
+     */
     @Override
     public Doctor DtoToEntity(DoctorDTO doctorDTO) {
 
@@ -56,6 +64,11 @@ public class DoctorDAO implements IDoctorDAO {
         }
     }
      */
+    /**
+     *
+     * @param medicart
+     * @return
+     */
     @Override
     public Doctor searchByMedicart(String medicart) {
         try {
@@ -74,6 +87,11 @@ public class DoctorDAO implements IDoctorDAO {
         }
     }
 
+    /**
+     *
+     * @param specialization
+     * @return
+     */
     @Override
     public List<DoctorDTO> searchBySpecialization(String specialization) {
         List<DoctorDTO> doctorsDTO = new ArrayList<>();
@@ -90,6 +108,11 @@ public class DoctorDAO implements IDoctorDAO {
         return doctorsDTO;
     }
 
+    /**
+     *
+     * @param doctorEntity
+     * @return
+     */
     public DoctorDTO EntityToDTO(Doctor doctorEntity) {
         DoctorDTO doctorDTO = new DoctorDTO();
         // doctorDTO.setId(doctorEntity.getId());
@@ -101,6 +124,10 @@ public class DoctorDAO implements IDoctorDAO {
         return doctorDTO;
     }
 
+    /**
+     *
+     * @return
+     */
     public static DoctorDAO getInstance() {
         return new DoctorDAO() {
         };

@@ -12,10 +12,18 @@ public class AdministratorDAO implements IAdministratorDAO {
     private static final Logger LOGGER = Logger.getLogger(AdministratorDAO.class.getName());
     private final MongoCollection<User> collectionUser;
 
+    /**
+     * 
+     */
     public AdministratorDAO() {
         this.collectionUser = ConnectionDB.getDatabase().getCollection("user", User.class);
     }
 
+    /**
+     * 
+     * @param administratorDTO
+     * @return 
+     */
     @Override
     public Administrator DtoToEntity(AdministratorDTO administratorDTO) {
         Administrator adminisrator = new Administrator();
@@ -23,6 +31,11 @@ public class AdministratorDAO implements IAdministratorDAO {
         return adminisrator;
     }
 
+    /**
+     * 
+     * @param administrator
+     * @return 
+     */
     @Override
     public AdministratorDTO EntityToDTO(Administrator administrator) {
         AdministratorDTO administratorDTO = new AdministratorDTO();
@@ -56,6 +69,10 @@ public class AdministratorDAO implements IAdministratorDAO {
 
 
     }
+     */
+    /**
+     * 
+     * @return 
      */
     public static AdministratorDAO getInstance() {
         return new AdministratorDAO() {

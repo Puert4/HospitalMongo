@@ -9,6 +9,11 @@ import entities.Patient;
 public interface IPatientDAO {
 
     //  public void registerPatient(PatientDTO newPatient);
+    /**
+     *
+     * @param curp
+     * @return
+     */
     public Patient searchPatientByCurp(String curp);
 
     /*
@@ -18,8 +23,18 @@ public interface IPatientDAO {
  
 
      */
+    /**
+     *
+     * @param patient
+     * @return
+     */
     public PatientDTO EntityToDto(Patient patient);
 
+    /**
+     *
+     * @param newPatientDTO
+     * @return
+     */
     public Patient DtoToEntity(PatientDTO newPatientDTO);
 
     /*

@@ -22,10 +22,17 @@ public class UserDAO implements IUserDAO {
     private final MongoCollection<User> userCollection;
     private static final Logger LOGGER = Logger.getLogger(UserDAO.class.getName());
 
+    /**
+     *
+     */
     private UserDAO() {
         this.userCollection = ConnectionDB.getDatabase().getCollection("user", User.class);
     }
 
+    /**
+     *
+     * @param newUserDTO
+     */
     @Override
     public void registerUser(NewUserDTO newUserDTO) {
         try {
@@ -36,6 +43,11 @@ public class UserDAO implements IUserDAO {
         }
     }
 
+    /**
+     *
+     * @param newUserDTO
+     * @return
+     */
     @Override
     public User DtoToEntity(NewUserDTO newUserDTO) {
         try {
@@ -64,6 +76,12 @@ public class UserDAO implements IUserDAO {
         }
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     @Override
     public User findUserByUsernameAndPassword(String username, String password) {
         try {
@@ -81,6 +99,11 @@ public class UserDAO implements IUserDAO {
         }
     }
 
+    /**
+     *
+     * @param user
+     * @return
+     */
     public ExistentUserDTO EntitytoDTO(User user) {
         ExistentUserDTO ExistentUserDTO = new ExistentUserDTO();
         ExistentUserDTO.setUser(user.getUser());
@@ -102,6 +125,12 @@ public class UserDAO implements IUserDAO {
         return ExistentUserDTO;
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     public boolean userAndPasswordExist(String username, String password) {
         try {
 
@@ -118,6 +147,11 @@ public class UserDAO implements IUserDAO {
         }
     }
 
+    /**
+     *
+     * @param username
+     * @return
+     */
     public boolean userExist(String username) {
         try {
 
@@ -249,6 +283,10 @@ public class UserDAO implements IUserDAO {
         user.setDoctor(doctor);
 
     }
+     */
+    /**
+     *
+     * @return
      */
     public static UserDAO getInstance() {
         return new UserDAO() {

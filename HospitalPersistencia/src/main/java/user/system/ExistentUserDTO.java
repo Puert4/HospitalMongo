@@ -19,9 +19,20 @@ public class ExistentUserDTO {
     private DoctorDTO doctorDTO;
     private AdministratorDTO administratorDTO;
 
+    /**
+     *
+     */
     public ExistentUserDTO() {
     }
 
+    /**
+     *
+     * @param id
+     * @param user
+     * @param password
+     * @param userType
+     * @param patientDTO
+     */
     public ExistentUserDTO(ObjectId id, String user, String password, String userType, PatientDTO patientDTO) {
         this.id = id;
         this.user = user;
@@ -30,6 +41,14 @@ public class ExistentUserDTO {
         this.patientDTO = patientDTO;
     }
 
+    /**
+     *
+     * @param id
+     * @param user
+     * @param password
+     * @param userType
+     * @param doctorDTO
+     */
     public ExistentUserDTO(ObjectId id, String user, String password, String userType, DoctorDTO doctorDTO) {
         this.id = id;
         this.user = user;
@@ -38,6 +57,14 @@ public class ExistentUserDTO {
         this.doctorDTO = doctorDTO;
     }
 
+    /**
+     *
+     * @param id
+     * @param user
+     * @param password
+     * @param userType
+     * @param administratorDTO
+     */
     public ExistentUserDTO(ObjectId id, String user, String password, String userType, AdministratorDTO administratorDTO) {
         this.id = id;
         this.user = user;
@@ -46,18 +73,34 @@ public class ExistentUserDTO {
         this.administratorDTO = administratorDTO;
     }
 
+    /**
+     *
+     * @return
+     */
     public ObjectId getId() {
         return id;
     }
 
+    /**
+     *
+     * @param id
+     */
     public void setId(ObjectId id) {
         this.id = id;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUser() {
         return user;
     }
 
+    /**
+     *
+     * @param user
+     */
     public void setUser(String user) {
         this.user = user;
     }
@@ -66,38 +109,74 @@ public class ExistentUserDTO {
         return password;
     }
 
+    /**
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     *
+     * @return
+     */
     public String getUserType() {
         return userType;
     }
 
+    /**
+     *
+     * @param userType
+     */
     public void setUserType(String userType) {
         this.userType = userType;
     }
 
+    /**
+     *
+     * @return
+     */
     public PatientDTO getPatientDTO() {
         return patientDTO;
     }
 
+    /**
+     *
+     * @param patientDTO
+     */
     public void setPatientDTO(PatientDTO patientDTO) {
         this.patientDTO = patientDTO;
     }
 
+    /**
+     *
+     * @return
+     */
     public DoctorDTO getDoctorDTO() {
         return doctorDTO;
     }
 
+    /**
+     *
+     * @param doctorDTO
+     */
     public void setDoctorDTO(DoctorDTO doctorDTO) {
         this.doctorDTO = doctorDTO;
     }
 
+    /**
+     *
+     * @return
+     */
     public AdministratorDTO getAdministratorDTO() {
         return administratorDTO;
     }
 
+    /**
+     *
+     * @param administratorDTO
+     */
     public void setAdministratorDTO(AdministratorDTO administratorDTO) {
         this.administratorDTO = administratorDTO;
     }

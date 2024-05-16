@@ -108,6 +108,11 @@ public abstract class AppointmentManager implements IAppointmentManager {
 
     }
 
+    /**
+     * 
+     * @param curp
+     * @return 
+     */
     @Override
     public List<ExistentAppointmentDTO> getAppointmentsByCurp(String curp) {
         List<ExistentAppointmentDTO> appointments = new ArrayList<>();
@@ -130,6 +135,11 @@ public abstract class AppointmentManager implements IAppointmentManager {
         return appointments;
     }
 
+    /**
+     * 
+     * @param medicalCart
+     * @return 
+     */
     @Override
     public List<ExistentAppointmentDTO> getAppointmentsByMedicalCart(String medicalCart) {
         List<ExistentAppointmentDTO> appointments = new ArrayList<>();
@@ -152,6 +162,11 @@ public abstract class AppointmentManager implements IAppointmentManager {
         return appointments;
     }
 
+    /**
+     * 
+     * @param appointmentId
+     * @return 
+     */
     @Override
     public boolean cancelAppointment(ObjectId appointmentId) {
         try {
@@ -290,6 +305,10 @@ public abstract class AppointmentManager implements IAppointmentManager {
 
 
 
+     */
+    /**
+     * 
+     * @return 
      */
     public static AppointmentManager getInstance() {
         return new AppointmentManager() {

@@ -17,10 +17,18 @@ public class PatientDAO implements IPatientDAO {
     private static final Logger LOGGER = Logger.getLogger(PatientDAO.class.getName());
     private final MongoCollection<User> collectionUser;
 
+    /**
+     * 
+     */
     public PatientDAO() {
         this.collectionUser = ConnectionDB.getDatabase().getCollection("user", User.class);
     }
 
+    /**
+     * 
+     * @param curp
+     * @return 
+     */
     @Override
     public Patient searchPatientByCurp(String curp) {
         try {
@@ -113,6 +121,11 @@ public class PatientDAO implements IPatientDAO {
         }
     }
      */
+    /**
+     * 
+     * @param patient
+     * @return 
+     */
     @Override
     public PatientDTO EntityToDto(Patient patient) {
         PatientDTO PatientDTO = new PatientDTO();
@@ -132,6 +145,11 @@ public class PatientDAO implements IPatientDAO {
         return PatientDTO;
     }
 
+    /**
+     * 
+     * @param newPatientDTO
+     * @return 
+     */
     @Override
     public Patient DtoToEntity(PatientDTO newPatientDTO) {
         Patient patient = new Patient();
@@ -170,6 +188,10 @@ public class PatientDAO implements IPatientDAO {
 
         return patient;
     }
+     */
+    /**
+     * 
+     * @return 
      */
     public static PatientDAO getInstance() {
         return new PatientDAO() {

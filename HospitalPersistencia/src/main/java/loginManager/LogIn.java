@@ -14,6 +14,12 @@ public abstract class LogIn implements ILogIn {
     private LogIn() {
     }
 
+    /**
+     *
+     * @param user
+     * @param password
+     * @return
+     */
     @Override
     public Long validateUser(String user, String password) {
 
@@ -46,6 +52,10 @@ public abstract class LogIn implements ILogIn {
         }
     }
 
+    /**
+     *
+     * @return
+     */
     public static LogIn getInstance() {
         return new LogIn() {
         };
