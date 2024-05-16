@@ -3,8 +3,10 @@ package presentation;
 import appointment.system.ExistentAppointmentDTO;
 import appointment.system.IAppointmentManager;
 import factory.Factory;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.bson.types.ObjectId;
@@ -29,6 +31,23 @@ public class JFrameInitialPatient extends javax.swing.JFrame {
     }
 
     private void cargarCitasPaciente() {
+//        DefaultTableModel tblModel = (DefaultTableModel) jTableAppointment.getModel();
+//        tblModel.setRowCount(0); // Limpiar la tabla antes de cargar los nuevos datos
+//
+//        IAppointmentManager appointmentManager = Factory.getAppointmentManager();
+//
+//        List<ExistentAppointmentDTO> appointments = appointmentManager.getAppointmentsByCurp(existentUserDTO.getPatientDTO().getCurp());
+//
+//        for (ExistentAppointmentDTO appointment : appointments) {
+//            tblModel.addRow(new Object[]{
+//                appointment.getAppointmentDate().getTime(),
+//                appointment.getDoctor().getName(),
+//                appointment.getNote(),
+//                appointment.getStatus()
+//            });
+//            listaDeLongs.add(appointment.getId());
+//        }
+
         DefaultTableModel tblModel = (DefaultTableModel) jTableAppointment.getModel();
         tblModel.setRowCount(0); // Limpiar la tabla antes de cargar los nuevos datos
 
@@ -36,9 +55,15 @@ public class JFrameInitialPatient extends javax.swing.JFrame {
 
         List<ExistentAppointmentDTO> appointments = appointmentManager.getAppointmentsByCurp(existentUserDTO.getPatientDTO().getCurp());
 
+        // Formato de fecha personalizado
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+
         for (ExistentAppointmentDTO appointment : appointments) {
+            // Formatear la fecha
+            String formattedDate = dateFormat.format(appointment.getAppointmentDate());
+
             tblModel.addRow(new Object[]{
-                appointment.getAppointmentDate().getTime(),
+                formattedDate,
                 appointment.getDoctor().getName(),
                 appointment.getNote(),
                 appointment.getStatus()

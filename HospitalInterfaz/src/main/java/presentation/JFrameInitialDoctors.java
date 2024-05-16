@@ -8,8 +8,10 @@ import appointment.system.IAppointmentManager;
 import doctor.system.DoctorDTO;
 import doctor.system.IDoctorDAO;
 import factory.Factory;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.bson.types.ObjectId;
@@ -53,10 +55,15 @@ public class JFrameInitialDoctors extends javax.swing.JFrame {
 
         List<ExistentAppointmentDTO> appointments = appointmentManager.getAppointmentsByMedicalCart(existenetUserDTO.getDoctorDTO().getMedicalCart());
 
+        //Date format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+
         for (ExistentAppointmentDTO appointment : appointments) {
-            //   String dateFormat = appointment.getAppointmentDate().get(Calendar.DAY_OF_MONTH) + "/" + (appointment.getAppointmentDate().get(Calendar.MONTH) + 1) + "/" + appointment.getAppointmentDate().get(Calendar.YEAR) + " " + appointment.getAppointmentDate().get(Calendar.HOUR_OF_DAY) + ":00";
+
+            String formattedDate = dateFormat.format(appointment.getAppointmentDate());
+
             tblModel.addRow(new Object[]{
-                appointment.getAppointmentDate().getTime(),
+                formattedDate,
                 appointment.getPatient().getNames(),
                 appointment.getNote(),
                 appointment.getStatus()
